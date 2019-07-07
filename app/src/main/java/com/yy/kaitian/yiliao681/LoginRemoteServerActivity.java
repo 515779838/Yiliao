@@ -48,6 +48,8 @@ public class LoginRemoteServerActivity extends Activity {
     private String mStrMD5Pwd = "";
     private String mStrPwd = "";
 
+    private View viewline1,viewline2;
+
     private void loginTDSServer(String paramString) {
         HttpGet localHttpGet = new HttpGet(paramString);
         try {
@@ -115,6 +117,9 @@ public class LoginRemoteServerActivity extends Activity {
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         setContentView(R.layout.login);
+        this.viewline1 =  findViewById(R.id.viewline1);
+        this.viewline2 =  findViewById(R.id.viewline2);
+
         this.mPwdEdit = ((EditText) findViewById(R.id.login_pwd_edit));
         this.mAccountEdit = ((AutoCompleteTextView) findViewById(R.id.login_account_edit));
         this.mSavePwdCheckBox = ((CheckBox) findViewById(R.id.login_save_pwd_checkbox));
@@ -180,6 +185,8 @@ public class LoginRemoteServerActivity extends Activity {
     }
 
     private void login(final String strAccount, final String strPwd, String strMD5Pwd) {
+
+        Log.e("zj","strAccount = "+strAccount+",pwd = "+strMD5Pwd);
         OkHttpUtils.get().tag(this)
                 .url(UrlApi.BaseUrl + UrlApi.Login)
                 .addParams("name", strAccount)
@@ -188,10 +195,13 @@ public class LoginRemoteServerActivity extends Activity {
             @Override
             public void onError(Call call, Exception e, int id) {
 
+                Log.e("zj","e = "+e.toString());
             }
 
             @Override
             public void onResponse(String response, int id) {
+
+                Log.e("zj","response = "+response);
                 response = response.substring(2,response.length() - 2).replace("\\", "");
                 Login login = GsonUtils.INSTANCE.parseToBean(response, Login.class);
                 if(login != null){
@@ -209,10 +219,16 @@ public class LoginRemoteServerActivity extends Activity {
                         localBundle1.putString("url",login.getLink());
                         localIntent.putExtras(localBundle1);
                         setResult(-1, localIntent);
+
                         finish();
+                    }else {
+//                        viewline1.setBackgroundColor(getResources().getColor(R.color.color_ff7998));
+//                        viewline2.setBackgroundColor(getResources().getColor(R.color.color_ff7998));
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "登录失败！", Toast.LENGTH_SHORT).show();
+                    viewline1.setBackgroundColor(getResources().getColor(R.color.color_ff7998));
+                    viewline2.setBackgroundColor(getResources().getColor(R.color.color_ff7998));
                 }
             }
         });

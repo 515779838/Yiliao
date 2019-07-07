@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,8 +54,7 @@ public class TDSMainActivity extends Activity {
     private static final int MESSAGE_SERVER_LOGIN_RESULT = 4;
     private static final int REQUEST_ENABLE_BT = 3;
     private static final String TAG = "TDSMainActivity";
-    private static final int[] mImages = {R.drawable.user_manager, R.drawable.login, R.drawable.device, R.drawable.connect_device, R.drawable.analysis, R.drawable.report, R.drawable.exit};
-    GridView gridView;
+    //    GridView gridView;
     private BluetoothAdapter mBluetoothAdapter = null;
     private TDSService mBoundService;
     private String mConnectedDeviceName = null;
@@ -95,8 +95,10 @@ public class TDSMainActivity extends Activity {
     private String mStrPWD = "";
     String[] mStrPointArrays;
     private String mStrUID = "";
-    private TextView mTitle;
+    //    private TextView mTitle;
     private String mStrReportUrl = "";
+
+    private LinearLayout ll_home1, ll_home2, ll_home3, ll_home4, ll_home5, ll_home6;
 
     private void deviceManage() {
         startActivity(new Intent(this, DeviceManageActivity.class));
@@ -180,15 +182,15 @@ public class TDSMainActivity extends Activity {
                 return;
             case 3:
                 this.mConnectedDeviceName = this.mBoundService.getConnectedDeviceName();
-                this.mTitle.setText(R.string.title_connected_to);
-                this.mTitle.append(this.mConnectedDeviceName);
+//                this.mTitle.setText(R.string.title_connected_to);
+//                this.mTitle.append(this.mConnectedDeviceName);
                 return;
             case 2:
-                this.mTitle.setText(R.string.title_connecting);
+//                this.mTitle.setText(R.string.title_connecting);
                 return;
             case 0:
             case MESSAGE_RIGHT_TITLE_SET:
-                this.mTitle.setText(R.string.title_not_connected);
+//                this.mTitle.setText(R.string.title_not_connected);
         }
     }
 
@@ -249,8 +251,8 @@ public class TDSMainActivity extends Activity {
         if (localPointDetectData == null)
             return;
         CustomerProfilesClass localCustomerProfilesClass = localMyDatabaseHandler.getProfileById(localPointDetectData.getCustomerID());
-         if(localCustomerProfilesClass == null)
-             return;
+        if (localCustomerProfilesClass == null)
+            return;
         this.mIntelligentID = paramInt;
 //        String str1 = "" + "ф" + localCustomerProfilesClass.getName();
 //
@@ -311,9 +313,9 @@ public class TDSMainActivity extends Activity {
         builder.append("ф");
         builder.append(localCustomerProfilesClass.getProfession());
         builder.append("ф");
-        builder.append("Female".equals(localCustomerProfilesClass.getSex())?"F":"M");
+        builder.append("Female".equals(localCustomerProfilesClass.getSex()) ? "F" : "M");
         builder.append("ф");
-        builder.append("married".equals(localCustomerProfilesClass.getMaritalStatus())?"M":"C");
+        builder.append("married".equals(localCustomerProfilesClass.getMaritalStatus()) ? "M" : "C");
         builder.append("ф");
 
         builder.append(localCustomerProfilesClass.getHeight());
@@ -328,11 +330,11 @@ public class TDSMainActivity extends Activity {
         builder.append("ф");
 
 
-        builder.append("无".equals(localCustomerProfilesClass.getMedicalHistory1())?"":localCustomerProfilesClass.getMedicalHistory1());
+        builder.append("无".equals(localCustomerProfilesClass.getMedicalHistory1()) ? "" : localCustomerProfilesClass.getMedicalHistory1());
         builder.append("|");
-        builder.append("无".equals(localCustomerProfilesClass.getMedicalHistory2())?"":localCustomerProfilesClass.getMedicalHistory2());
+        builder.append("无".equals(localCustomerProfilesClass.getMedicalHistory2()) ? "" : localCustomerProfilesClass.getMedicalHistory2());
         builder.append("|");
-        builder.append("无".equals(localCustomerProfilesClass.getMedicalHistory3())?"":localCustomerProfilesClass.getMedicalHistory3());
+        builder.append("无".equals(localCustomerProfilesClass.getMedicalHistory3()) ? "" : localCustomerProfilesClass.getMedicalHistory3());
         builder.append("ф");
         builder.append(mStrUID);
         builder.append("ф");
@@ -346,29 +348,30 @@ public class TDSMainActivity extends Activity {
         }
         AppLog.instance().d(builder.toString());
         OkHttpUtils.get().tag(this)
-                .url(UrlApi.BaseUrl+UrlApi.up_date)
-                .addParams("sDate",builder.toString())
+                .url(UrlApi.BaseUrl + UrlApi.up_date)
+                .addParams("sDate", builder.toString())
                 .build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 
             }
+
             @Override
             public void onResponse(String response, int id) {
                 response = response.substring(2, response.length() - 2).replace("\\", "");
                 UpDate upDate = GsonUtils.INSTANCE.parseToBean(response, UpDate.class);
-                if(upDate != null){
-                    if(upDate.isResult()){
-                            if (mIntelligentID != -1) {
-                                new MyDatabaseHandler(getApplicationContext()).deletePointData(mIntelligentID);
-                                mIntelligentID = -1;
-                            }
-                            mLoginPoint = (-1 + mLoginPoint);
-                            String str2 = "已登录：" + mLoginPoint;
-                            mTitle = ((TextView) findViewById(R.id.title_left_text));
-                            mTitle.setText(str2);
-                            mTitle = ((TextView) findViewById(R.id.title_right_text));
-                            getReport();
+                if (upDate != null) {
+                    if (upDate.isResult()) {
+                        if (mIntelligentID != -1) {
+                            new MyDatabaseHandler(getApplicationContext()).deletePointData(mIntelligentID);
+                            mIntelligentID = -1;
+                        }
+                        mLoginPoint = (-1 + mLoginPoint);
+                        String str2 = "已登录：" + mLoginPoint;
+//                            mTitle = ((TextView) findViewById(R.id.title_left_text));
+//                            mTitle.setText(str2);
+//                            mTitle = ((TextView) findViewById(R.id.title_right_text));
+                        getReport();
                         return;
                     }
                 }
@@ -444,9 +447,9 @@ public class TDSMainActivity extends Activity {
                         try {
                             this.mLoginPoint = Integer.parseInt(str3 != null ? str3.trim() : "0");
                             String str4 = "已登录：" + this.mLoginPoint;
-                            this.mTitle = ((TextView) findViewById(R.id.title_left_text));
-                            this.mTitle.setText(str4);
-                            this.mTitle = ((TextView) findViewById(R.id.title_right_text));
+//                            this.mTitle = ((TextView) findViewById(R.id.title_left_text));
+//                            this.mTitle.setText(str4);
+//                            this.mTitle = ((TextView) findViewById(R.id.title_right_text));
                             Log.i("TDSMainActivity", "uid=" + this.mStrUID + " pwd=" + this.mStrPWD);
                             return;
                         } catch (Exception e) {
@@ -600,6 +603,7 @@ public class TDSMainActivity extends Activity {
 //                    Toast.makeText(getApplicationContext(), str1, Toast.LENGTH_SHORT).show();
 //                }
     private long openTime = 0;
+
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         PathUtils.init();
@@ -607,10 +611,10 @@ public class TDSMainActivity extends Activity {
         Log.e("TDSMainActivity", "+++ ON CREATE +++");
         AppLog.instance().iToSd("TDSMainActivity");
 
-        getWindow().setFlags(128, 128);
-        requestWindowFeature(7);
+//        getWindow().setFlags(128, 128);
+//        requestWindowFeature(7);
         setContentView(R.layout.detect_main);
-        getWindow().setFeatureInt(7, R.layout.custom_title);
+//        getWindow().setFeatureInt(7, R.layout.custom_title);
 //        MyPreferManager.getInstance().init(getApplicationContext());
 //        long xianzhiTime = 1510904972000L;
 //        openTime = System.currentTimeMillis();
@@ -621,9 +625,9 @@ public class TDSMainActivity extends Activity {
 //        if(!MyPreferManager.getInstance().getIsYouXiao()){
 //            System.exit(0);
 //        }
-        this.mTitle = ((TextView) findViewById(R.id.title_left_text));
-        this.mTitle.setText(R.string.app_name);
-        this.mTitle = ((TextView) findViewById(R.id.title_right_text));
+//        this.mTitle = ((TextView) findViewById(R.id.title_left_text));
+//        this.mTitle.setText(R.string.app_name);
+//        this.mTitle = ((TextView) findViewById(R.id.title_right_text));
         this.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (this.mBluetoothAdapter == null) {
             Toast.makeText(this, "Bluetooth is not available", Toast.LENGTH_SHORT).show();
@@ -631,52 +635,104 @@ public class TDSMainActivity extends Activity {
             return;
         }
         this.mReceiver = new TDSServiceReceiver();
-        this.gridView = ((GridView) findViewById(R.id.gridView1));
+
+
+//        this.gridView = ((GridView) findViewById(R.id.gridView1));
         this.mStrPointArrays = getResources().getStringArray(R.array.main_arrays);
         this.mIadapter = new ImageAdapter(this);
 
-        for (int i = 0; ; i++) {
-            if (i >= mImages.length) {
-                this.gridView.setOnItemClickListener(new OnItemClickListener() {
-                    public void onItemClick(AdapterView<?> paramAnonymousAdapterView, View paramAnonymousView, int paramAnonymousInt, long paramAnonymousLong) {
-                        switch (paramAnonymousInt) {
-                            default:
-                                break;
-                            case 0:
-                                TDSMainActivity.this.loginServer();//登录
-                                break;
-                            case 1:
-                                TDSMainActivity.this.userManager();//用户管理
-                                break;
-                            case 2:
-                                TDSMainActivity.this.deviceManage();//设备管理
-                                break;
-                            case 3:
-                                TDSMainActivity.this.startDetectPormpt();//开始检测
-                                break;
-                            case 4:
-                                try {
-                                    TDSMainActivity.this.getIntelligentReading();//智能解读
-                                    break;
-                                } catch (UnsupportedEncodingException localUnsupportedEncodingException) {
-                                    localUnsupportedEncodingException.printStackTrace();
-                                    break;
-                                }
-                            case 5:
-                                TDSMainActivity.this.getReport();//获取报告
-                                break;
-                            case 6:
-                                TDSMainActivity.this.finish();//退出系统
-                                break;
-                        }
-                    }
-                });
-                break;
-            }
-            this.mIadapter.addItem(mImages[i], this.mStrPointArrays[i], -1);
-        }
-        this.gridView.setAdapter(this.mIadapter);
+//        for (int i = 0; ; i++) {
+//            if (i >= mImages.length) {
+//                this.gridView.setOnItemClickListener(new OnItemClickListener() {
+//                    public void onItemClick(AdapterView<?> paramAnonymousAdapterView, View paramAnonymousView, int paramAnonymousInt, long paramAnonymousLong) {
+//                        switch (paramAnonymousInt) {
+//                            default:
+//                                break;
+//                            case 0:
+//                                TDSMainActivity.this.loginServer();//登录
+//                                break;
+//                            case 1:
+//                                TDSMainActivity.this.userManager();//用户管理
+//                                break;
+//                            case 2:
+//                                TDSMainActivity.this.deviceManage();//设备管理
+//                                break;
+//                            case 3:
+//                                TDSMainActivity.this.startDetectPormpt();//开始检测
+//                                break;
+//                            case 4:
+//                                try {
+//                                    TDSMainActivity.this.getIntelligentReading();//智能解读
+//                                    break;
+//                                } catch (UnsupportedEncodingException localUnsupportedEncodingException) {
+//                                    localUnsupportedEncodingException.printStackTrace();
+//                                    break;
+//                                }
+//                            case 5:
+//                                TDSMainActivity.this.getReport();//获取报告
+//                                break;
+//                            case 6:
+//                                TDSMainActivity.this.finish();//退出系统
+//                                break;
+//                        }
+//                    }
+//                });
+//                break;
+//            }
+//            this.mIadapter.addItem(mImages[i], this.mStrPointArrays[i], -1);
+//        }
+//        this.gridView.setAdapter(this.mIadapter);
 
+        ll_home1 = (LinearLayout) findViewById(R.id.ll_home1);
+        ll_home2 = (LinearLayout) findViewById(R.id.ll_home2);
+        ll_home3 = (LinearLayout) findViewById(R.id.ll_home3);
+        ll_home4 = (LinearLayout) findViewById(R.id.ll_home4);
+        ll_home5 = (LinearLayout) findViewById(R.id.ll_home5);
+        ll_home6 = (LinearLayout) findViewById(R.id.ll_home6);
+        setListener();
+    }
+
+    private void setListener() {
+        ll_home1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TDSMainActivity.this.userManager();//用户管理
+            }
+        });
+        ll_home2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TDSMainActivity.this.deviceManage();//设备管理
+            }
+        });
+        ll_home3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TDSMainActivity.this.startDetectPormpt();//开始检测
+            }
+        });
+        ll_home4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    TDSMainActivity.this.getIntelligentReading();//智能解读
+                } catch (UnsupportedEncodingException localUnsupportedEncodingException) {
+                    localUnsupportedEncodingException.printStackTrace();
+                }
+            }
+        });
+        ll_home5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TDSMainActivity.this.getReport();//获取报告
+            }
+        });
+        ll_home6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TDSMainActivity.this.finish();//退出系统
+            }
+        });
     }
 
     public void onDestroy() {
@@ -745,14 +801,14 @@ public class TDSMainActivity extends Activity {
                             return;
                         case 0:
                         case 1:
-                            TDSMainActivity.this.mTitle.setText(R.string.title_not_connected);
+//                            TDSMainActivity.this.mTitle.setText(R.string.title_not_connected);
                             return;
                         case 3:
-                            TDSMainActivity.this.mTitle.setText(R.string.title_connected_to);
-                            TDSMainActivity.this.mTitle.append(TDSMainActivity.this.mConnectedDeviceName);
+//                            TDSMainActivity.this.mTitle.setText(R.string.title_connected_to);
+//                            TDSMainActivity.this.mTitle.append(TDSMainActivity.this.mConnectedDeviceName);
                             return;
                         case 2:
-                            TDSMainActivity.this.mTitle.setText(R.string.title_connecting);
+//                            TDSMainActivity.this.mTitle.setText(R.string.title_connecting);
                             return;
                     }
                 case 3:

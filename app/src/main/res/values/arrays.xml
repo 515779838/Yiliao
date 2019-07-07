@@ -118,7 +118,7 @@
         <item>24.左胃经：冲阳</item>
     </string-array>
     <string-array name="main_arrays">
-        <item>登录系统</item>
+        <!--<item>登录系统</item>-->
         <item>用户管理</item>
         <item>设备管理</item>
         <item>开始检测</item>

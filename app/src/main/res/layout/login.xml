@@ -1,101 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:layout_gravity="center"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20.0dip"
-            android:text="\n登陆服务器"
-            android:textSize="20.0dip"/>
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="80dp"
+                android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20.0dip"
-            android:layout_marginRight="10.0dip"
-            android:text="@string/login_account"
-            android:textSize="18.0dip"/>
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_launcher" />
 
-        <AutoCompleteTextView
-            android:id="@id/login_account_edit"
-            android:text=""
-            android:layout_width="fill_parent"
-            android:layout_height="40.0dip"
-            android:layout_marginRight="20.0dip"/>
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="登陆服务器"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="24sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20.0dip"
-            android:layout_marginRight="10.0dip"
-            android:text="@string/login_pwd"
-            android:textSize="18.0dip"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="欢迎来到YHN远程健康检测系统"
+                        android:textColor="@color/color_66" />
 
-        <EditText
-            android:id="@id/login_pwd_edit"
-            android:text=""
-            android:layout_width="fill_parent"
-            android:layout_height="40.0dip"
-            android:layout_marginRight="20.0dip"/>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
+                </LinearLayout>
 
-        <CheckBox
-            android:id="@id/login_save_pwd_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20.0dip"
-            android:text="@string/login_checkbox_save_pwd"/>
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@id/login_login_button"
-            android:layout_width="100.0dip"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30.0dip"
-            android:layout_marginRight="30.0dip"
-            android:text="@string/login_button_login"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_account"
+                    android:textColor="@color/color_33"
+                    android:textSize="12sp" />
 
-        <Button
-            android:id="@id/login_cancel_button"
-            android:layout_width="100.0dip"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30.0dip"
-            android:layout_marginRight="30.0dip"
-            android:text="@string/login_button_cancel"/>
-    </LinearLayout>
+                <AutoCompleteTextView
+                    android:id="@id/login_account_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:color/transparent"
+                    android:text="yh01103042"
+                    android:textColor="@color/color_66"
+                    android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/viewline1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_pwd"
+                    android:textColor="@color/color_33"
+                    android:textSize="12sp" />
+
+                <AutoCompleteTextView
+
+                    android:id="@id/login_pwd_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:color/transparent"
+                    android:text="ke22pk49"
+                    android:textColor="@color/color_66"
+                    android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/viewline2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimary" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_loginError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:text="账号或密码错误"
+                android:textColor="@color/color_ff7998"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <CheckBox
+                    android:id="@id/login_save_pwd_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_checkbox_save_pwd" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@id/login_login_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="42dp"
+                    android:background="@drawable/background_btn"
+                    android:text="@string/login_button_login"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@id/login_cancel_button"
+                    android:layout_width="100.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30.0dip"
+                    android:layout_marginRight="30.0dip"
+                    android:text="@string/login_button_cancel"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

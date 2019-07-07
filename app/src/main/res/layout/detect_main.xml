@@ -1,16 +1,276 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <GridView
-        android:id="@id/gridView1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:columnWidth="90.0dip"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="117dp"
+        android:background="@color/colorPrimary"
         android:gravity="center"
-        android:horizontalSpacing="1.0dip"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="1.0dip"/>
+        android:text="YHN远程健康检测系统"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_home1"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginTop="31dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_home1"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="24dp"
+                    android:translationZ="4dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@mipmap/ic_home_item_01" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="39dp"
+                        android:text="用户管理"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:text="User manage"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_home2"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="31dp"
+                    android:layout_marginRight="48dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_home1"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="24dp"
+                    android:translationZ="4dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@mipmap/ic_home_item_02" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="39dp"
+                        android:text="设备管理"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Equipment manage"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_home3"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_home2"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="24dp"
+                    android:translationZ="4dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@mipmap/ic_home_item_03" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="39dp"
+                        android:text="开始检测"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Start testing"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_home4"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="48dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_home2"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="24dp"
+                    android:translationZ="4dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@mipmap/ic_home_item_04" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="39dp"
+                        android:text="智能解读"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Intelligent interpre"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_home5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="31dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_home3"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="24dp"
+                    android:translationZ="4dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@mipmap/ic_home_item_05" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="39dp"
+                        android:text="取得报告"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Get report"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_home6"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="48dp"
+                    android:layout_marginBottom="31dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_home4"
+                    android:elevation="3dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:translationZ="5dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@mipmap/ic_home_item_close" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="智能解读"
+                        android:textColor="@color/color_66"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
 </LinearLayout>
