@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomTheme" parent="@android:style/Theme.Black">
+        <item name="android:startYear">1890</item>
+    </style>
+    <style name="CustomTitleBarTheme" parent="@android:style/Theme.Black">
+        <item name="android:windowTitleSize">50.0dip</item>
+    </style>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:phone="http://schemas.android.com/apk/res/com.android.phone"
+                  android:key="list_customer_key"
+                  android:title="@string/customer_list_title"/>

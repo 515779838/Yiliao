@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:icon="@android:drawable/ic_menu_search" android:id="@id/point_datas_list_reading" android:title="@string/inte_reading" />
+    <item android:icon="@android:drawable/ic_menu_search" android:id="@id/point_datas_list_del" android:title="@string/delete" />
+</menu>

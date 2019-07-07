@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:title="@string/customer_profiles" android:key="profile_detail_key"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:phone="http://schemas.android.com/apk/res/com.android.phone">
+    <Preference android:persistent="false" android:title="@string/customer_name" android:key="profile_detail_name" />
+    <Preference android:persistent="false" android:title="@string/birthday" android:key="profile_detail_birthday" />
+    <Preference android:persistent="false" android:title="@string/native_place" android:key="profile_detail_native_place" />
+    <Preference android:persistent="false" android:title="@string/profession" android:key="profile_detail_profession" />
+    <Preference android:persistent="false" android:title="@string/height" android:key="profile_detail_height" />
+    <Preference android:persistent="false" android:title="@string/weight" android:key="profile_detail_weight" />
+    <Preference android:persistent="false" android:title="@string/systolic_pressure" android:key="profile_detail_systolic_pressure" />
+    <Preference android:persistent="false" android:title="@string/diastolic_pressure" android:key="profile_detail_diastolic_pressure" />
+    <Preference android:persistent="false" android:title="@string/pulse" android:key="profile_detail_pulse" />
+    <Preference android:persistent="false" android:title="@string/sex" android:key="profile_detail_sex" />
+    <Preference android:persistent="false" android:title="@string/marital_status" android:key="profile_detail_marital_status" />
+    <Preference android:persistent="false" android:title="@string/medical_history_1" android:key="profile_detail_medical_history_1" />
+    <Preference android:persistent="false" android:title="@string/medical_history_2" android:key="profile_detail_medical_history_2" />
+    <Preference android:persistent="false" android:title="@string/medical_history_3" android:key="profile_detail_medical_history_3" />
+    <Preference android:persistent="false" android:title="@string/memo" android:key="profile_detail_memo" />
+    <Preference android:persistent="false" android:title="@string/customer_register_time" android:key="profile_detail_register_time" />
+    <Preference android:persistent="false" android:title="@string/customer_detect_time" android:key="profile_detail_detect_time" />
+</PreferenceScreen>
