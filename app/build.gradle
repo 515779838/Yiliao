@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.yy.kaitian.yiliao681"
+        applicationId "com.yy.kaitian.yl"
         minSdkVersion 19
         targetSdkVersion 22
         versionCode 1
