@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,11 +16,13 @@ import android.widget.Toast;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class ProfilesListActivity extends ListActivity {
     private static final boolean D = true;
     private static final String TAG = "ListActivity";
     private String[] mNameString = null;
+
     private Hashtable<String, int[]> mProfileTable;
     private boolean mbEmpty;
 
@@ -197,8 +200,8 @@ public class ProfilesListActivity extends ListActivity {
         super.onStart();
         Log.e("ListActivity", "++ ON START ++");
         getProfilesNameList();
-        Log.e("zj","1111 = "+mNameString);
-        if (this.mNameString == null){
+        Log.e("zj", "1111 = " + mNameString);
+        if (this.mNameString == null) {
             return;
         }
         adapter = new ProfilesArrayAdapter(this, this.mNameString);
@@ -207,7 +210,22 @@ public class ProfilesListActivity extends ListActivity {
         adapter.setOnStartCheckClick(new ProfilesArrayAdapter.OnStartCheckClick() {
             @Override
             public void setOnStartCheckClick(int position) {
-                Log.e("zj", "setOnStartCheckClick");
+                String name = mNameString[position];
+                String id = "";
+                for (Map.Entry<String, int[]> entry : mProfileTable.entrySet()) {
+                    if (entry.getKey().equals(name)) {
+                        id = "" + entry.getValue()[0];
+                        break;
+                    }
+                }
+                Bundle localBundle = new Bundle();
+                Intent localIntent = new Intent();
+                localBundle.putString("customer_type", "0");
+                localBundle.putString("customer_name", name);
+                localBundle.putString("customer_id", id);
+                localIntent.putExtras(localBundle);
+                setResult(-1, localIntent);
+                finish();
             }
         });
 

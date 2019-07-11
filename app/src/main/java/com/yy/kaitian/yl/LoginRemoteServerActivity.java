@@ -48,7 +48,7 @@ public class LoginRemoteServerActivity extends Activity {
     private String mStrMD5Pwd = "";
     private String mStrPwd = "";
 
-    private View viewline1,viewline2;
+    private View viewline1, viewline2;
 
     private void loginTDSServer(String paramString) {
         HttpGet localHttpGet = new HttpGet(paramString);
@@ -117,8 +117,8 @@ public class LoginRemoteServerActivity extends Activity {
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         setContentView(R.layout.login);
-        this.viewline1 =  findViewById(R.id.viewline1);
-        this.viewline2 =  findViewById(R.id.viewline2);
+        this.viewline1 = findViewById(R.id.viewline1);
+        this.viewline2 = findViewById(R.id.viewline2);
 
         this.mPwdEdit = ((EditText) findViewById(R.id.login_pwd_edit));
         this.mAccountEdit = ((AutoCompleteTextView) findViewById(R.id.login_account_edit));
@@ -184,9 +184,9 @@ public class LoginRemoteServerActivity extends Activity {
         });
     }
 
-    private void login(final String strAccount, final String strPwd, String strMD5Pwd) {
+    private void login(final String strAccount, final String strPwd, final String strMD5Pwd) {
 
-        Log.e("zj","strAccount = "+strAccount+",pwd = "+strMD5Pwd);
+        Log.e("zj", "strAccount = " + strAccount + ",pwd = " + strMD5Pwd);
         OkHttpUtils.get().tag(this)
                 .url(UrlApi.BaseUrl + UrlApi.Login)
                 .addParams("name", strAccount)
@@ -195,17 +195,25 @@ public class LoginRemoteServerActivity extends Activity {
             @Override
             public void onError(Call call, Exception e, int id) {
 
-                Log.e("zj","e = "+e.toString());
+                Log.e("zj", "e = " + e.toString());
             }
 
             @Override
             public void onResponse(String response, int id) {
 
-                Log.e("zj","response = "+response);
-                response = response.substring(2,response.length() - 2).replace("\\", "");
+                Log.e("zj", "response = " + response);
+                response = response.substring(2, response.length() - 2).replace("\\", "");
                 Login login = GsonUtils.INSTANCE.parseToBean(response, Login.class);
-                if(login != null){
-                    if(login.isState()){
+                if (login != null) {
+                    if (login.isState()) {
+                        SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("isLogin", "1");
+                        editor.putString("strAccount", strAccount);
+                        editor.putString("strMD5Pwd", strMD5Pwd);
+                        editor.putString("strPwd", strPwd);
+                        editor.commit();
+
                         Bundle localBundle1 = new Bundle();
                         Intent localIntent = new Intent();
                         Toast.makeText(getApplicationContext(), "登陆系统成功！", Toast.LENGTH_SHORT).show();
@@ -215,13 +223,16 @@ public class LoginRemoteServerActivity extends Activity {
                         localBundle1.putString("login_result", "OK");
                         localBundle1.putString("login_uid", strAccount);
                         localBundle1.putString("login_pwd", strPwd);
-                        localBundle1.putString("login_point", login.getNum()+"");
-                        localBundle1.putString("url",login.getLink());
+                        localBundle1.putString("login_point", login.getNum() + "");
+                        localBundle1.putString("url", login.getLink());
                         localIntent.putExtras(localBundle1);
                         setResult(-1, localIntent);
 
                         finish();
-                    }else {
+                    } else {
+                        Toast.makeText(getApplicationContext(), "登录失败！", Toast.LENGTH_SHORT).show();
+                        viewline1.setBackgroundColor(getResources().getColor(R.color.color_ff7998));
+                        viewline2.setBackgroundColor(getResources().getColor(R.color.color_ff7998));
 //                        viewline1.setBackgroundColor(getResources().getColor(R.color.color_ff7998));
 //                        viewline2.setBackgroundColor(getResources().getColor(R.color.color_ff7998));
                     }
@@ -232,6 +243,14 @@ public class LoginRemoteServerActivity extends Activity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (TDSMainActivity.tdsMainActivity != null) {
+            TDSMainActivity.tdsMainActivity.finish();
+        }
+        super.onBackPressed();
     }
 
     @Override

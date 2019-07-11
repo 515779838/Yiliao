@@ -2,6 +2,7 @@ package com.yy.kaitian.yl;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -41,6 +42,7 @@ public class DetectMainActivity extends Activity {
     private int mFinalValue;
     private final Handler mHandler = new Handler() {
         public void handleMessage(Message paramAnonymousMessage) {
+            progressDialog.dismiss();
             switch (paramAnonymousMessage.what) {
                 default:
                 case TDS_POINT_AUTO_DETECT:
@@ -59,7 +61,9 @@ public class DetectMainActivity extends Activity {
                     int i = localMyDatabaseHandler.updatePointData(DetectMainActivity.this.mPointDatas);
                     Log.i("DetectMainActivity", "updatePointData nRet=" + i);
                     DetectMainActivity.this.mUnFinishPointNum = DetectMainActivity.this.mPointDatas.getUnfinishedPointNum();
-                    DetectMainActivity.this.mTitle.setText("未检穴位数:" + DetectMainActivity.this.mUnFinishPointNum + "  客户名称:" + DetectMainActivity.this.mCustomerName);
+                    //DetectMainActivity.this.mTitle.setText("未检穴位数:" + DetectMainActivity.this.mUnFinishPointNum + "  客户名称:" + DetectMainActivity.this.mCustomerName);
+                    ((TextView) findViewById(R.id.tv_name)).setText("客户名称:" + DetectMainActivity.this.mCustomerName);
+                    ((TextView) findViewById(R.id.tv_num)).setText("未检穴位数:" + DetectMainActivity.this.mUnFinishPointNum);
                     break;
             }
 //            do {
@@ -94,6 +98,8 @@ public class DetectMainActivity extends Activity {
     private int mUnFinishPointNum = 0;
     private boolean mbAutoDetect;
     private boolean mbDetectFirst = true;
+
+    private ProgressDialog progressDialog;
 
     private void doNextDetect() {
         this.mAutoPoint = (1 + this.mAutoPoint);
@@ -165,7 +171,7 @@ public class DetectMainActivity extends Activity {
             }
         }
         Message localMessage = this.mHandler.obtainMessage(TDS_POINT_AUTO_DETECT);
-        this.mHandler.sendMessageDelayed(localMessage, 1000L);
+        this.mHandler.sendMessageDelayed(localMessage, 10L);
     }
 
     protected void doStartManualPointDetect(int paramInt) {
@@ -229,7 +235,9 @@ public class DetectMainActivity extends Activity {
                 int k = new MyDatabaseHandler(this).updatePointData(this.mPointDatas);
                 Log.i("DetectMainActivity", "updatePointData nRet=" + k);
                 this.mUnFinishPointNum = this.mPointDatas.getUnfinishedPointNum();
-                this.mTitle.setText("未检穴位数:" + this.mUnFinishPointNum + "  客户名称:" + this.mCustomerName);
+                // this.mTitle.setText("未检穴位数:" + this.mUnFinishPointNum + "  客户名称:" + this.mCustomerName);
+                ((TextView) findViewById(R.id.tv_name)).setText("客户名称:" + this.mCustomerName);
+                ((TextView) findViewById(R.id.tv_num)).setText("未检穴位数:" + this.mUnFinishPointNum);
                 break;
         }
 //    do
@@ -286,18 +294,18 @@ public class DetectMainActivity extends Activity {
 //      this.mTitle.setText("未检穴位数:" + this.mUnFinishPointNum + "  客户名称:" + this.mCustomerName);
 //    }
         if (this.mbAutoDetect)
-        doNextDetect();
+            doNextDetect();
 
     }
 
     public void onCreate(Bundle paramBundle) {
-        setTheme(R.style.CustomTitleBarTheme);
+        //setTheme(R.style.CustomTitleBarTheme);
         super.onCreate(paramBundle);
         Log.e("DetectMainActivity", "+++ ON CREATE +++");
-        getWindow().setFlags(128, 128);
-        requestWindowFeature(7);
-        setContentView(R.layout.detect_main);
-        getWindow().setFeatureInt(7, R.layout.custom_title_device_manage);
+        // getWindow().setFlags(128, 128);
+        // requestWindowFeature(7);
+        setContentView(R.layout.detect_main2);
+        // getWindow().setFeatureInt(7, R.layout.custom_title_device_manage);
         new Bundle();
         Bundle localBundle = getIntent().getExtras();
         this.mCustomerDetectType = Integer.parseInt(localBundle.getString("customer_detect_type"));
@@ -313,24 +321,28 @@ public class DetectMainActivity extends Activity {
             mUnFinishPointNum = mPointDatas.getUnfinishedPointNum();
         }
 
-        Button localButton1 = (Button) findViewById(R.id.connect_device);
-        localButton1.setTextSize(12.0F);
-        localButton1.setText(R.string.auto_detect_all);
-        localButton1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View paramAnonymousView) {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("准备中...");
+        progressDialog.setCancelable(false);
+
+        findViewById(R.id.rl_check).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // progressDialog.show();
                 DetectMainActivity.this.mAutoDetectMode = AUTO_DETECT_MODE_ALL;
                 DetectMainActivity.this.doStartAutoPointDetect();//检测所有穴位
             }
         });
-        Button localButton2 = (Button) findViewById(R.id.disconnect_device);
-        localButton2.setText(" 返回 ");
-        localButton2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View paramAnonymousView) {
-                DetectMainActivity.this.finish();
+        findViewById(R.id.ll_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
-        this.mTitle = ((TextView) findViewById(R.id.prompt_text));
-        this.mTitle.setText("未检穴位数:" + this.mUnFinishPointNum + "  客户名称:" + this.mCustomerName);
+
+        ((TextView) findViewById(R.id.tv_name)).setText("客户名称:" + this.mCustomerName);
+        ((TextView) findViewById(R.id.tv_num)).setText("未检穴位数:" + this.mUnFinishPointNum);
+
         this.gridView = ((GridView) findViewById(R.id.gridView1));
         this.mStrPointArrays = getResources().getStringArray(R.array.point_arrays);
         this.mIadapter = new ImageAdapter(this);
@@ -387,10 +399,10 @@ public class DetectMainActivity extends Activity {
 
         for (int i = 0, a = mImages.length; i < a; i++) {
             if (this.mCustomerDetectType == 0)
-                this.mIadapter.addItem(this.mImages[i], this.mStrPointArrays[i], -1);
+                this.mIadapter.addItem(this.mImages[i], this.mStrPointArrays[i], Color.parseColor("#ff666666"));
             else {
                 if ("null".equals(this.mPointDatas.getPointValue(i)))
-                    this.mIadapter.addItem(this.mImages[i], this.mStrPointArrays[i], Color.WHITE);
+                    this.mIadapter.addItem(this.mImages[i], this.mStrPointArrays[i], Color.parseColor("#ff666666"));
                 else
                     this.mIadapter.addItem(this.mImages[i], this.mStrPointArrays[i], Color.RED);
             }

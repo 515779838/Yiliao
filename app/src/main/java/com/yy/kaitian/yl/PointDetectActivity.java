@@ -105,9 +105,11 @@ public class PointDetectActivity extends Activity {
     private void ResetTDSXYChar() {
         this.mSeries.clear();
     }
+
     private final int[] mImages = {R.drawable.m1, R.drawable.m2, R.drawable.m3, R.drawable.m4, R.drawable.m5, R.drawable.m6,
             R.drawable.m7, R.drawable.m8, R.drawable.m9, R.drawable.m10, R.drawable.m11, R.drawable.m12, R.drawable.m13, R.drawable.m14, R.drawable.m15, R.drawable.m16,
             R.drawable.m17, R.drawable.m18, R.drawable.m19, R.drawable.m20, R.drawable.m21, R.drawable.m22, R.drawable.m23, R.drawable.m24};
+
     private void UpDateImage(int paramInt) {
         try {
             this.image.setImageResource(mImages[paramInt]);
@@ -170,7 +172,7 @@ public class PointDetectActivity extends Activity {
         } else {
             i = this.mPointAverageValue - paramInt;
         }
-        if (i * 100 / this.mPointAverageValue >= 5){
+        if (i * 100 / this.mPointAverageValue >= 5) {
             this.mPointEqualTime = 0;
             this.mPointTotalValue = 0;
             this.mSeries.clear();
@@ -180,7 +182,7 @@ public class PointDetectActivity extends Activity {
         this.mPointEqualTime = (1 + this.mPointEqualTime);
         this.mPointTotalValue = (paramInt + this.mPointTotalValue);
         this.mPointAverageValue = (this.mPointTotalValue / this.mPointEqualTime);
-        if (this.mPointVauleBufIndex < 19){
+        if (this.mPointVauleBufIndex < 19) {
             UpDateXYChar(this.mPointVauleBufIndex, d2);
             this.mPointVauleBufIndex = (1 + this.mPointVauleBufIndex);
             if (this.mChartView != null)
@@ -221,6 +223,7 @@ public class PointDetectActivity extends Activity {
     }
 
     private int mError = 0;
+
     private void checkDeviceResponse() {
         if ((this.mDeviceResponseTime == 0) && (!this.mbExit)) {
 //            Toast.makeText(this, "终端设备没有回复！", Toast.LENGTH_SHORT).show();
@@ -228,7 +231,7 @@ public class PointDetectActivity extends Activity {
             if (this.mIsBound)
                 getPointValue(this.mCurrentPoint);
         }
-        if(mError >= 5){
+        if (mError >= 5) {
             Toast.makeText(this, "终端设备没有回复！", Toast.LENGTH_SHORT).show();
             mError = 0;
         }
@@ -373,10 +376,10 @@ public class PointDetectActivity extends Activity {
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         Log.e("PointDetectActivity", "+++ ON CREATE +++");
-        getWindow().setFlags(128, 128);
-        requestWindowFeature(7);
+        //getWindow().setFlags(128, 128);
+        // requestWindowFeature(7);
         setContentView(R.layout.point_detect);
-        getWindow().setFeatureInt(7, R.layout.custom_title);
+        // getWindow().setFeatureInt(7, R.layout.custom_title);
         String[] arrayOfString = getResources().getStringArray(R.array.point_detail_arrays);
         this.image = ((ImageView) findViewById(R.id.imageView1));
         this.mReceiver = new TDSServiceReceiver();
@@ -386,9 +389,13 @@ public class PointDetectActivity extends Activity {
         this.mbExit = true;
         new Bundle();
         this.mCurrentPoint = Integer.parseInt(getIntent().getExtras().getString("point_id"));
-        this.mTitle = ((TextView) findViewById(R.id.title_left_text));
-        this.mTitle.setText(arrayOfString[this.mCurrentPoint]);
-        this.mTitle = ((TextView) findViewById(R.id.title_right_text));
+//        this.mTitle = ((TextView) findViewById(R.id.title_left_text));
+//        this.mTitle.setText(arrayOfString[this.mCurrentPoint]);
+        this.mTitle = ((TextView) findViewById(R.id.tv_right));
+
+        ((TextView) findViewById(R.id.tv_name)).setText(arrayOfString[this.mCurrentPoint]);
+        ((TextView) findViewById(R.id.tv_id)).setText("" + (this.mCurrentPoint + 1) + "/24");
+
         UpDateImage(this.mCurrentPoint);
         initSounds();
     }

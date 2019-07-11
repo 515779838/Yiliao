@@ -3,6 +3,7 @@ package com.yy.kaitian.yl;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -11,16 +12,27 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewAnimator;
 
+import com.yy.kaitian.yl.view.WheelView;
+import com.yy.kaitian.yl.view.WheelView.OnWheelViewListener;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class CustomerProfilesEditActivity extends Activity {
     static final int DATE_DIALOG_ID = 999;
@@ -83,6 +95,11 @@ public class CustomerProfilesEditActivity extends Activity {
     private boolean isUnmarried = true;
     private EditText et_ChangeDate;
 
+    private WheelView wv;
+    private int selectType = 0;// 0籍贯，1职业，2病史1，3病史2，4病史3
+    private String mString = "";
+    private DatePicker datePicker;
+
     private void AddNewProfile() {
 //    if (this.mbModify);
         for (String str = "确定要修改客户档案?"; ; str = "确定要新增客户档案?") {
@@ -138,8 +155,9 @@ public class CustomerProfilesEditActivity extends Activity {
             myPrompt("请输入名称！");
             return -1;
         }
-        this.mNativePlace = this.mNativeSpinner.getSelectedItem().toString();
-        this.mProfession = this.mProfessionSpinner.getSelectedItem().toString();
+
+        this.mNativePlace = ((TextView) findViewById(R.id.tv_address)).getText().toString();
+        this.mProfession = ((TextView) findViewById(R.id.tv_profession)).getText().toString();
 
         if (isMale) {
             this.mSex = "Male";
@@ -196,9 +214,12 @@ public class CustomerProfilesEditActivity extends Activity {
             myPrompt("脉搏输入错误，请输入整数！");
             return -1;
         }
-        this.mMedicalHistory1 = this.mSpinnerMedicalHistory1.getSelectedItem().toString();
-        this.mMedicalHistory2 = this.mSpinnerMedicalHistory2.getSelectedItem().toString();
-        this.mMedicalHistory3 = this.mSpinnerMedicalHistory3.getSelectedItem().toString();
+
+        this.mMedicalHistory1 = ((TextView) findViewById(R.id.tv_customer_medical_history1)).getText().toString();
+        this.mMedicalHistory2 = ((TextView) findViewById(R.id.tv_customer_medical_history2)).getText().toString();
+        this.mMedicalHistory3 = ((TextView) findViewById(R.id.tv_customer_medical_history3)).getText().toString();
+
+
         this.mMemo = this.mEditMemo.getText().toString();
         if (this.mMemo.length() == 0) {
             myPrompt("请输入客户ID！");
@@ -263,6 +284,10 @@ public class CustomerProfilesEditActivity extends Activity {
     }
 
     private void initWidget() {
+        String[] arrayOfString1 = getResources().getStringArray(R.array.native_place_arrays);
+        String[] arrayOfString2 = getResources().getStringArray(R.array.prfession_arrays);
+        String[] arrayOfString3 = getResources().getStringArray(R.array.medical_history_arrays);
+
         this.ll_back = ((LinearLayout) findViewById(R.id.ll_back));
         this.tv_save = ((TextView) findViewById(R.id.tv_save));
 
@@ -271,6 +296,23 @@ public class CustomerProfilesEditActivity extends Activity {
         tv_unmarried = ((TextView) findViewById(R.id.tv_unmarried));
         tv_married = ((TextView) findViewById(R.id.tv_married));
         et_ChangeDate = ((EditText) findViewById(R.id.et_ChangeDate));
+        datePicker = (DatePicker) findViewById(R.id.datePicker);
+        try {
+            View view1 = ((ViewAnimator) ((ScrollView) ((LinearLayout) datePicker.getChildAt(0)).getChildAt(1)).getChildAt(0)).getChildAt(0);
+            ViewGroup.LayoutParams layoutParams2 = view1.getLayoutParams();
+            layoutParams2.width = getWindowManager().getDefaultDisplay().getWidth();
+            view1.setLayoutParams(layoutParams2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        wv = (WheelView) findViewById(R.id.wv);
+        wv.setOffset(2);
+        ((TextView) findViewById(R.id.tv_address)).setText(arrayOfString1[0]);
+        ((TextView) findViewById(R.id.tv_profession)).setText(arrayOfString2[0]);
+
+        ((TextView) findViewById(R.id.tv_customer_medical_history1)).setText(arrayOfString3[0]);
+        ((TextView) findViewById(R.id.tv_customer_medical_history2)).setText(arrayOfString3[0]);
+        ((TextView) findViewById(R.id.tv_customer_medical_history3)).setText(arrayOfString3[0]);
 
         this.mEditName = ((EditText) findViewById(R.id.customer_name_edit));
         Calendar localCalendar = Calendar.getInstance();
@@ -280,6 +322,8 @@ public class CustomerProfilesEditActivity extends Activity {
         this.mBirthday = (this.year + "-" + (1 + this.month) + "-" + this.day);
 //        this.btnChangeDate = ((Button) findViewById(R.id.btnChangeDate));
 //        this.btnChangeDate.setText(this.mBirthday);
+        ((EditText) findViewById(R.id.et_ChangeDate)).setText(this.mBirthday);
+
         this.mNativeSpinner = ((Spinner) findViewById(R.id.customer_native_place_spinner));
         this.mProfessionSpinner = ((Spinner) findViewById(R.id.customer_profession_spinner));
         this.mRadioSexGroup = ((RadioGroup) findViewById(R.id.radioSex));
@@ -296,6 +340,15 @@ public class CustomerProfilesEditActivity extends Activity {
         addListenerOnButton();
         if (this.mbModify)
             updateWidget(this.mId);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (findViewById(R.id.ll_main1).getVisibility() == View.VISIBLE) {
+            findViewById(R.id.ll_main1).callOnClick();
+            return;
+        }
+        super.onBackPressed();
     }
 
     private String myGetCurrentTime() {
@@ -328,16 +381,32 @@ public class CustomerProfilesEditActivity extends Activity {
             this.mEditPulse.setText(this.mPulse);
             this.mSex = localCustomerProfilesClass.getSex();
             if (this.mSex.equals("Male")) {
-                ((RadioButton) findViewById(R.id.radioMale)).setChecked(true);
+                isMale = true;
+                tv_male.setTextColor(getResources().getColor(R.color.white));
+                tv_male.setBackground(getResources().getDrawable(R.drawable.bg_radio_check));
+                tv_female.setTextColor(getResources().getColor(R.color.colorPrimary));
+                tv_female.setBackground(getResources().getDrawable(R.drawable.bg_radio));
             } else {
-                ((RadioButton) findViewById(R.id.radioFemale)).setChecked(true);
+                isMale = false;
+                tv_female.setTextColor(getResources().getColor(R.color.white));
+                tv_female.setBackground(getResources().getDrawable(R.drawable.bg_radio2));
+                tv_male.setTextColor(getResources().getColor(R.color.colorPrimary));
+                tv_male.setBackground(getResources().getDrawable(R.drawable.bg_radio_check2));
             }
 
             this.mMaritalStatus = localCustomerProfilesClass.getMaritalStatus();
-            if (!this.mMaritalStatus.equals("married")) {
-                ((RadioButton) findViewById(R.id.radioMarried)).setChecked(true);
+            if (this.mMaritalStatus.equals("married")) {
+                isUnmarried = false;
+                tv_married.setTextColor(getResources().getColor(R.color.white));
+                tv_married.setBackground(getResources().getDrawable(R.drawable.bg_radio2));
+                tv_unmarried.setTextColor(getResources().getColor(R.color.colorPrimary));
+                tv_unmarried.setBackground(getResources().getDrawable(R.drawable.bg_radio_check2));
             } else {
-                ((RadioButton) findViewById(R.id.radioUnmarried)).setChecked(true);
+                isUnmarried = true;
+                tv_unmarried.setTextColor(getResources().getColor(R.color.white));
+                tv_unmarried.setBackground(getResources().getDrawable(R.drawable.bg_radio_check));
+                tv_married.setTextColor(getResources().getColor(R.color.colorPrimary));
+                tv_married.setBackground(getResources().getDrawable(R.drawable.bg_radio));
             }
 
             this.mMemo = localCustomerProfilesClass.getMemo();
@@ -349,45 +418,12 @@ public class CustomerProfilesEditActivity extends Activity {
 //      arrayOfString3 = getResources().getStringArray(R.array.medical_history_arrays);
             this.mMedicalHistory2 = localCustomerProfilesClass.getMedicalHistory2();
             this.mMedicalHistory3 = localCustomerProfilesClass.getMedicalHistory3();
-            String[] arrayOfString1 = getResources().getStringArray(R.array.native_place_arrays);
-            String[] arrayOfString2 = getResources().getStringArray(R.array.prfession_arrays);
-            String[] arrayOfString3 = getResources().getStringArray(R.array.medical_history_arrays);
-            int i = 0;
-            int j = 0;
-            int k = 0;
-            int m = 0;
-            for (int n = 0; n < arrayOfString3.length; n++) {
-                if (i < arrayOfString1.length) {
-                    if (arrayOfString1[i].equals(this.mNativePlace)) {
-                        this.mNativeSpinner.setSelection(i);
-                    }
-                    i++;
-                }
-                if (j < arrayOfString2.length) {
-                    if (arrayOfString2[j].equals(this.mProfession)) {
-                        this.mProfessionSpinner.setSelection(j);
-                    }
-                    j++;
-                }
 
-                if (k < arrayOfString3.length) {
-                    if (arrayOfString3[k].equals(this.mMedicalHistory1)) {
-                        this.mSpinnerMedicalHistory1.setSelection(k);
-                    }
-                    k++;
-                }
-
-                if (m < arrayOfString3.length) {
-                    if (arrayOfString3[m].equals(this.mMedicalHistory2)) {
-                        this.mSpinnerMedicalHistory2.setSelection(m);
-                    }
-                    m++;
-                }
-
-                if (arrayOfString3[n].equals(this.mMedicalHistory3)) {
-                    this.mSpinnerMedicalHistory3.setSelection(n);
-                }
-            }
+            ((TextView) findViewById(R.id.tv_address)).setText(this.mNativePlace);
+            ((TextView) findViewById(R.id.tv_profession)).setText(this.mProfession);
+            ((TextView) findViewById(R.id.tv_customer_medical_history1)).setText(this.mMedicalHistory1);
+            ((TextView) findViewById(R.id.tv_customer_medical_history2)).setText(this.mMedicalHistory2);
+            ((TextView) findViewById(R.id.tv_customer_medical_history3)).setText(this.mMedicalHistory3);
         } else {
             Toast.makeText(this, "读取数据失败!", Toast.LENGTH_SHORT).show();
         }
@@ -404,35 +440,27 @@ public class CustomerProfilesEditActivity extends Activity {
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         setContentView(R.layout.customer_profiles);
+        Bundle localBundle = getIntent().getExtras();
+        if (localBundle.getString("customer_profile_edit_type").equals("Modify")) {
+            this.mbModify = true;
+            this.mId = Integer.parseInt(localBundle.getString("customer_profile_id"));
+            Log.e("zj", "modify id=" + this.mId);
+        } else {
+            this.mbModify = false;
+        }
         initWidget();
         setListenter();
         if (this.mCustomerPrifiles == null)
             this.mCustomerPrifiles = new CustomerProfilesClass();
-        Bundle localBundle = getIntent().getExtras();
-
+        Log.e("zj", " new add");
         if (localBundle.getString("customer_profile_edit_type").equals("Modify")) {
-//            getWindow().setFeatureInt(7, R.layout.custom_title_button);
-//            localButton1 = (Button) findViewById(R.id.customer_modify);
-//            localButton2 = (Button) findViewById(R.id.disconnect_device);
-            this.mbModify = true;
-            this.mId = Integer.parseInt(localBundle.getString("customer_profile_id"));
-            Log.e("zj", "modify id=" + this.mId);
-
-            this.tv_save.setText(R.string.modify);
-
-//            ((Button) findViewById(R.id.customer_delete)).setOnClickListener(new View.OnClickListener() {
-//                public void onClick(View paramAnonymousView) {
-//                    CustomerProfilesEditActivity.this.DelCustomerPrifile();
-//                }
-//            });
+             this.tv_save.setText(R.string.modify);
         } else {
-//            getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title_device_manage);
-//            localButton2 = (Button) findViewById(R.id.disconnect_device);
-//            localButton1 = (Button) findViewById(R.id.connect_device);
             this.tv_save.setText(R.string.new_save);
-            this.mbModify = false;
-
         }
+    }
+
+    private void setListenter() {
         this.tv_save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View paramAnonymousView) {
                 CustomerProfilesEditActivity.this.AddNewProfile();
@@ -444,17 +472,6 @@ public class CustomerProfilesEditActivity extends Activity {
                 CustomerProfilesEditActivity.this.CancelAddNewProfile();
             }
         });
-        Log.e("zj", " new add");
-    }
-
-    private void setListenter() {
-        et_ChangeDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
         tv_male.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -498,7 +515,164 @@ public class CustomerProfilesEditActivity extends Activity {
                 tv_unmarried.setBackground(getResources().getDrawable(R.drawable.bg_radio_check2));
             }
         });
+        wv.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+            @Override
+            public void onSelected(int selectedIndex, String item) {
+                Log.e("zzzzzz", item + "   " + selectedIndex);
+                mString = item;
+            }
+        });
+        findViewById(R.id.ll_address).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectType = 0;
+                mString = "";
+                findViewById(R.id.ll_main1).setVisibility(View.VISIBLE);
+                String[] arrayOfString1 = getResources().getStringArray(R.array.native_place_arrays);
+                List<String> list = Arrays.asList(arrayOfString1);
+                wv.setItems(list);
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).equals(((TextView) findViewById(R.id.tv_address)).getText().toString())) {
+                        wv.setSeletion(i);
+                        break;
+                    }
+                }
+            }
+        });
+        findViewById(R.id.ll_profession).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectType = 1;
+                mString = "";
+                findViewById(R.id.ll_main1).setVisibility(View.VISIBLE);
+                String[] arrayOfString2 = getResources().getStringArray(R.array.prfession_arrays);
+                List<String> list = Arrays.asList(arrayOfString2);
+                wv.setItems(list);
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).equals(((TextView) findViewById(R.id.tv_profession)).getText().toString())) {
+                        wv.setSeletion(i);
+                        break;
+                    }
+                }
+            }
+        });
+        findViewById(R.id.ll_customer_medical_history1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectType = 2;
+                mString = "";
+                findViewById(R.id.ll_main1).setVisibility(View.VISIBLE);
+                String[] arrayOfString3 = getResources().getStringArray(R.array.medical_history_arrays);
+                List<String> list = Arrays.asList(arrayOfString3);
+                wv.setItems(list);
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).equals(((TextView) findViewById(R.id.tv_customer_medical_history1)).getText().toString())) {
+                        wv.setSeletion(i);
+                        break;
+                    }
+                }
+            }
+        });
+        findViewById(R.id.ll_customer_medical_history2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectType = 3;
+                mString = "";
+                findViewById(R.id.ll_main1).setVisibility(View.VISIBLE);
+                String[] arrayOfString3 = getResources().getStringArray(R.array.medical_history_arrays);
+                List<String> list = Arrays.asList(arrayOfString3);
+                wv.setItems(list);
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).equals(((TextView) findViewById(R.id.tv_customer_medical_history2)).getText().toString())) {
+                        wv.setSeletion(i);
+                        break;
+                    }
+                }
+            }
+        });
+        findViewById(R.id.ll_customer_medical_history3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectType = 4;
+                mString = "";
+                findViewById(R.id.ll_main1).setVisibility(View.VISIBLE);
+                String[] arrayOfString3 = getResources().getStringArray(R.array.medical_history_arrays);
+                List<String> list = Arrays.asList(arrayOfString3);
+                wv.setItems(list);
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).equals(((TextView) findViewById(R.id.tv_customer_medical_history3)).getText().toString())) {
+                        wv.setSeletion(i);
+                        break;
+                    }
+                }
+            }
+        });
+        findViewById(R.id.ll_main1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.ll_main1).setVisibility(View.GONE);
+            }
+        });
+        findViewById(R.id.ll_main2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+        findViewById(R.id.iv_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.ll_main1).setVisibility(View.GONE);
+            }
+        });
+        findViewById(R.id.iv_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.ll_main1).setVisibility(View.GONE);
+                if (mString.equals("")) {
+                    return;
+                }
+                switch (selectType) {
+                    case 0:
+                        ((TextView) findViewById(R.id.tv_address)).setText(mString);
+                        break;
+                    case 1:
+                        ((TextView) findViewById(R.id.tv_profession)).setText(mString);
+                        break;
+                    case 2:
+                        ((TextView) findViewById(R.id.tv_customer_medical_history1)).setText(mString);
+                        break;
+                    case 3:
+                        ((TextView) findViewById(R.id.tv_customer_medical_history2)).setText(mString);
+                        break;
+                    case 4:
+                        ((TextView) findViewById(R.id.tv_customer_medical_history3)).setText(mString);
+                        break;
+                }
+            }
+        });
+        findViewById(R.id.et_ChangeDate).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+//                    @Override
+//                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                        ((EditText) findViewById(R.id.et_ChangeDate)).setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+//                    }
+//                });
+                DatePickerDialog datePickerDialog = new DatePickerDialog(CustomerProfilesEditActivity.this, R.style.CustomDialogTheme, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        CustomerProfilesEditActivity.this.year = year;
+                        CustomerProfilesEditActivity.this.month = monthOfYear;
+                        CustomerProfilesEditActivity.this.day = dayOfMonth;
+                        ((EditText) findViewById(R.id.et_ChangeDate)).setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
     }
 
     protected Dialog onCreateDialog(int paramInt) {

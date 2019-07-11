@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@id/ScrollView01"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,638 +7,728 @@
     android:orientation="vertical"
     android:scrollbars="vertical">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@id/ScrollView01"
         android:layout_width="match_parent"
-        android:layout_height="44dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:scrollbars="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+
+            <LinearLayout
+                android:id="@+id/ll_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="12dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="12dp">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+
+                    android:src="@mipmap/ic_nav_back" />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="0dp"
+                android:gravity="center"
+                android:text="@string/customer_profiles"
+                android:textColor="@color/color_24272B"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="14dp"
+                android:gravity="center"
+                android:text="保存"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_D3DFEF" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="24dp"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/memo"
+                        android:textColor="@color/color_33" />
+
+
+                    <EditText
+                        android:id="@id/customer_memo_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="22dp"
+                        android:background="@drawable/shape_corner_edit"
+                        android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:drawablePadding="8dp"
+                        android:hint="点击输入客户ID"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/color_33"
+                        android:textColorHint="@color/color_99"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/customer_name"
+                        android:textColor="@color/color_33" />
+
+                    <EditText
+                        android:id="@id/customer_name_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="22dp"
+                        android:background="@drawable/shape_corner_edit"
+                        android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:drawablePadding="8dp"
+                        android:hint="点击输入名称"
+                        android:inputType="textPersonName"
+                        android:lines="1"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/color_33"
+                        android:textColorHint="@color/color_99"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/birthday"
+                        android:textColor="@color/color_33" />
+
+                    <EditText
+                        android:id="@+id/et_ChangeDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="22dp"
+                        android:background="@drawable/shape_corner_edit"
+                        android:drawablePadding="8dp"
+                        android:focusableInTouchMode="false"
+                        android:hint="点击输入生日"
+                        android:lines="1"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/color_33"
+                        android:textColorHint="@color/color_99"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/native_place"
+                        android:textColor="@color/color_33" />
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="22dp"
+                        android:background="@drawable/shape_corner_edit"
+                        android:gravity="center"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tv_address"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_input_down" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/profession"
+                        android:textColor="@color/color_33" />
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_profession"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="22dp"
+                        android:background="@drawable/shape_corner_edit"
+                        android:gravity="center"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tv_profession"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_input_down" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/native_place"
+                        android:textColor="@color/color_33"
+                        android:visibility="invisible" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="22dp">
+
+                        <TextView
+                            android:id="@+id/tv_male"
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/bg_radio_check"
+                            android:gravity="center"
+                            android:text="@string/male"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/tv_female"
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/bg_radio"
+                            android:gravity="center"
+                            android:text="@string/female"
+                            android:textColor="@color/colorPrimary" />
+
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/tv_unmarried"
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/bg_radio_check"
+                            android:gravity="center"
+                            android:text="@string/unmarried"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/tv_married"
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/bg_radio"
+                            android:gravity="center"
+                            android:text="@string/married"
+                            android:textColor="@color/colorPrimary" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/height"
+                        android:textColor="@color/color_33" />
+
+                    <EditText
+                        android:id="@id/customer_height_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="22dp"
+                        android:background="@drawable/shape_corner_edit"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:hint="点击输入身高"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/color_33"
+                        android:textColorHint="@color/color_99"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/weight"
+                        android:textColor="@color/color_33" />
+
+                    <EditText
+                        android:id="@id/customer_weight_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="22dp"
+                        android:background="@drawable/shape_corner_edit"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:hint="点击输入体重"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/color_33"
+                        android:textColorHint="@color/color_99"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/pulse"
+                        android:textColor="@color/color_33" />
+
+                    <EditText
+                        android:id="@id/customer_pulse_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="22dp"
+                        android:background="@drawable/shape_corner_edit"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:hint="点击输入脉搏"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/color_33"
+                        android:textColorHint="@color/color_99"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/systolic_pressure"
+                        android:textColor="@color/color_33" />
+
+                    <EditText
+                        android:id="@id/customer_systolic_pressure_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="22dp"
+                        android:background="@drawable/shape_corner_edit"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:hint="点击输入收缩压"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/color_33"
+                        android:textColorHint="@color/color_99"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/diastolic_pressure"
+                        android:textColor="@color/color_33" />
+
+                    <EditText
+                        android:id="@id/customer_diastolic_pressure_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="22dp"
+                        android:background="@drawable/shape_corner_edit"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:hint="点击输入舒张"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/color_33"
+                        android:textColorHint="@color/color_99"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/medical_history_1"
+                        android:textColor="@color/color_33" />
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_customer_medical_history1"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="22dp"
+                        android:background="@drawable/shape_corner_edit"
+                        android:gravity="center"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tv_customer_medical_history1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_input_down" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/medical_history_2"
+                        android:textColor="@color/color_33" />
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_customer_medical_history2"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="22dp"
+                        android:background="@drawable/shape_corner_edit"
+                        android:gravity="center"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tv_customer_medical_history2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_input_down" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/medical_history_3"
+                        android:textColor="@color/color_33" />
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_customer_medical_history3"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="22dp"
+                        android:background="@drawable/shape_corner_edit"
+                        android:gravity="center"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tv_customer_medical_history3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_input_down" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_main1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#aa000000"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
-            android:id="@+id/ll_back"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="12dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingLeft="12dp">
-
-            <ImageView
-                android:id="@+id/iv_back"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-
-                android:src="@mipmap/ic_nav_back" />
-        </LinearLayout>
-
-
-        <TextView
+            android:id="@+id/ll_main2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="0dp"
-            android:gravity="center"
-            android:text="@string/customer_profiles"
-            android:textColor="@color/color_24272B"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/tv_save"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="14dp"
-            android:gravity="center"
-            android:text="保存"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/color_D3DFEF" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginBottom="24dp"
-            android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="vertical">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:text="@string/memo"
-                    android:textColor="@color/color_33" />
+                <ImageView
+                    android:id="@+id/iv_cancel"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@mipmap/ic_select_close" />
 
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
 
-                <EditText
-                    android:id="@id/customer_memo_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginRight="22dp"
-                    android:background="@drawable/shape_corner_edit"
-                    android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    android:drawablePadding="8dp"
-                    android:hint="点击输入客户ID"
-                    android:inputType="text"
-                    android:lines="1"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:singleLine="true"
-                    android:text=""
-                    android:textColor="@color/color_33"
-                    android:textColorHint="@color/color_99"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:text="@string/customer_name"
-                    android:textColor="@color/color_33" />
-
-                <EditText
-                    android:id="@id/customer_name_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="22dp"
-                    android:background="@drawable/shape_corner_edit"
-                    android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    android:drawablePadding="8dp"
-                    android:hint="点击输入名称"
-                    android:inputType="textPersonName"
-                    android:lines="1"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:singleLine="true"
-                    android:text=""
-                    android:textColor="@color/color_33"
-                    android:textColorHint="@color/color_99"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:text="@string/birthday"
-                    android:textColor="@color/color_33" />
-
-                <EditText
-                    android:id="@+id/et_ChangeDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="22dp"
-                    android:background="@drawable/shape_corner_edit"
-                    android:drawablePadding="8dp"
-                    android:hint="点击输入生日"
-                    android:focusableInTouchMode="false"
-                    android:lines="1"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:singleLine="true"
-                    android:text=""
-                    android:textColor="@color/color_33"
-                    android:textColorHint="@color/color_99"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:text="@string/native_place"
-                    android:textColor="@color/color_33" />
-
-
-                <LinearLayout
-                    android:id="@+id/ll_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="22dp"
-                    android:background="@drawable/shape_corner_edit"
-                    android:gravity="center"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/tv_address"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="1" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_input_down" />
-
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:text="@string/profession"
-                    android:textColor="@color/color_33" />
-
-
-                <LinearLayout
-                    android:id="@+id/ll_profession"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="22dp"
-                    android:background="@drawable/shape_corner_edit"
-                    android:gravity="center"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/tv_profession"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="1" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_input_down" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:text="@string/native_place"
-                    android:textColor="@color/color_33"
-                    android:visibility="invisible" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="22dp">
-
-                    <TextView
-                        android:id="@+id/tv_male"
-                        android:layout_width="60dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_radio_check"
-                        android:gravity="center"
-                        android:text="@string/male"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        android:id="@+id/tv_female"
-                        android:layout_width="60dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_radio"
-                        android:gravity="center"
-                        android:text="@string/female"
-                        android:textColor="@color/colorPrimary" />
-
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/tv_unmarried"
-                        android:layout_width="60dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_radio_check"
-                        android:gravity="center"
-                        android:text="@string/unmarried"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        android:id="@+id/tv_married"
-                        android:layout_width="60dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_radio"
-                        android:gravity="center"
-                        android:text="@string/married"
-                        android:textColor="@color/colorPrimary" />
-
-                </LinearLayout>
-
+                <ImageView
+                    android:id="@+id/iv_ok"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@mipmap/ic_select_choose" />
 
             </LinearLayout>
 
-            <LinearLayout
+            <com.yy.kaitian.yl.view.WheelView
+                android:id="@+id/wv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:text="@string/height"
-                    android:textColor="@color/color_33" />
-
-                <EditText
-                    android:id="@id/customer_height_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="22dp"
-                    android:background="@drawable/shape_corner_edit"
-                    android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:hint="点击输入身高"
-                    android:inputType="number"
-                    android:lines="1"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:singleLine="true"
-                    android:text=""
-                    android:textColor="@color/color_33"
-                    android:textColorHint="@color/color_99"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:text="@string/weight"
-                    android:textColor="@color/color_33" />
-
-                <EditText
-                    android:id="@id/customer_weight_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="22dp"
-                    android:background="@drawable/shape_corner_edit"
-                    android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:hint="点击输入体重"
-                    android:inputType="number"
-                    android:lines="1"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:singleLine="true"
-                    android:text=""
-                    android:textColor="@color/color_33"
-                    android:textColorHint="@color/color_99"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:text="@string/pulse"
-                    android:textColor="@color/color_33" />
-
-                <EditText
-                    android:id="@id/customer_pulse_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="22dp"
-                    android:background="@drawable/shape_corner_edit"
-                    android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:hint="点击输入脉搏"
-                    android:inputType="number"
-                    android:lines="1"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:singleLine="true"
-                    android:text=""
-                    android:textColor="@color/color_33"
-                    android:textColorHint="@color/color_99"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:text="@string/systolic_pressure"
-                    android:textColor="@color/color_33" />
-
-                <EditText
-                    android:id="@id/customer_systolic_pressure_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="22dp"
-                    android:background="@drawable/shape_corner_edit"
-                    android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:hint="点击输入收缩压"
-                    android:inputType="number"
-                    android:lines="1"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:singleLine="true"
-                    android:text=""
-                    android:textColor="@color/color_33"
-                    android:textColorHint="@color/color_99"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:text="@string/diastolic_pressure"
-                    android:textColor="@color/color_33" />
-
-                <EditText
-                    android:id="@id/customer_diastolic_pressure_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="22dp"
-                    android:background="@drawable/shape_corner_edit"
-                    android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:hint="点击输入舒张"
-                    android:inputType="number"
-                    android:lines="1"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:singleLine="true"
-                    android:text=""
-                    android:textColor="@color/color_33"
-                    android:textColorHint="@color/color_99"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:text="@string/medical_history_1"
-                    android:textColor="@color/color_33" />
-
-
-                <LinearLayout
-                    android:id="@+id/ll_customer_medical_history1"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="22dp"
-                    android:background="@drawable/shape_corner_edit"
-                    android:gravity="center"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/tv_customer_medical_history1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="1" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_input_down" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:text="@string/medical_history_2"
-                    android:textColor="@color/color_33" />
-
-
-                <LinearLayout
-                    android:id="@+id/ll_customer_medical_history2"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="22dp"
-                    android:background="@drawable/shape_corner_edit"
-                    android:gravity="center"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/tv_customer_medical_history2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="1" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_input_down" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:text="@string/medical_history_1"
-                    android:textColor="@color/color_33" />
-
-
-                <LinearLayout
-                    android:id="@+id/ll_customer_medical_history3"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="22dp"
-                    android:background="@drawable/shape_corner_edit"
-                    android:gravity="center"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/tv_customer_medical_history3"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="1" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_input_down" />
-
-                </LinearLayout>
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_main3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#aa000000"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_main4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <DatePicker
+                android:theme="@style/CustomTheme"
+                android:id="@+id/datePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:datePickerMode="calendar"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

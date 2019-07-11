@@ -1,7 +1,8 @@
 package com.yy.kaitian.yl;
 
 import android.app.Activity;
-import android.app.AlertDialog.Builder;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -11,6 +12,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +23,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.yy.kaitian.yl.bean.Login;
 import com.yy.kaitian.yl.bean.UpDate;
 import com.yy.kaitian.yl.utils.AppLog;
 import com.yy.kaitian.yl.utils.GsonUtils;
@@ -37,6 +40,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 
 import okhttp3.Call;
+import okhttp3.Request;
 
 public class TDSMainActivity extends Activity {
     private SoundPool soundPool;
@@ -96,6 +100,8 @@ public class TDSMainActivity extends Activity {
 
     private LinearLayout ll_home1, ll_home2, ll_home3, ll_home4, ll_home5, ll_home6;
 
+    public static TDSMainActivity tdsMainActivity = null;
+
     private void deviceManage() {
         startActivity(new Intent(this, DeviceManageActivity.class));
     }
@@ -144,14 +150,14 @@ public class TDSMainActivity extends Activity {
             return;
         }
         if (GetFinishDataCount() <= 0) {
-            getReport();
+            getReport("智能解读");
             return;
         }
         startActivityForResult(new Intent(this, PointDatasPreferenceActivity.class), MESSAGE_POINT_DATA_SELECT_RESULT);
     }
 
     //取得报告
-    private void getReport() {
+    private void getReport(String title) {
         if (!this.mIsLoginServer) {
             showAlertDlg("您未登录系统，\n请在【登录系统】中登录", 1);
             return;
@@ -163,6 +169,7 @@ public class TDSMainActivity extends Activity {
         localBundle.putString("server_operate_type", "2");
         localBundle.putString("server_operate_url", str2);
         Intent localIntent = new Intent(this, WebViewActivity.class);
+        localIntent.putExtra("title", title);
         localIntent.putExtras(localBundle);
         startActivity(localIntent);
     }
@@ -198,7 +205,7 @@ public class TDSMainActivity extends Activity {
     }
 
     private void showAlertDlg(String paramString, int paramInt) {
-        Builder localBuilder = new Builder(this);
+        AlertDialog.Builder localBuilder = new AlertDialog.Builder(this);
         localBuilder.setTitle("提示");
         if (paramInt == 0) {
             localBuilder.setMessage(paramString).setCancelable(false).setPositiveButton("OK", new OnClickListener() {
@@ -367,7 +374,7 @@ public class TDSMainActivity extends Activity {
 //                            mTitle = ((TextView) findViewById(R.id.title_left_text));
 //                            mTitle.setText(str2);
 //                            mTitle = ((TextView) findViewById(R.id.title_right_text));
-                        getReport();
+                        getReport("智能解读");
                         return;
                     }
                 }
@@ -378,7 +385,8 @@ public class TDSMainActivity extends Activity {
     }
 
     private void userManager() {
-        startActivity(new Intent(this, ProfilesListActivity.class));
+        // startActivity(new Intent(this, ProfilesListActivity.class));
+        startActivityForResult(new Intent(this, ProfilesListActivity.class), MESSAGE_CUSTOMER_SELECT_RESULT);
     }
 
     int GetFinishDataCount() {
@@ -477,7 +485,7 @@ public class TDSMainActivity extends Activity {
                 final int i = Integer.parseInt(paramIntent.getExtras().getString("point_datas_id"));
                 Log.i("TDSMainActivity", "point_datas_id=" + i);
                 if (this.mLoginPoint <= 0) {
-                    Builder localBuilder1 = new Builder(this);
+                    AlertDialog.Builder localBuilder1 = new AlertDialog.Builder(this);
                     localBuilder1.setMessage("你没有足够的次数可以使用!").setPositiveButton("确定", new OnClickListener() {
                         public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                             paramAnonymousDialogInterface.cancel();
@@ -486,7 +494,7 @@ public class TDSMainActivity extends Activity {
                     localBuilder1.create().show();
                     return;
                 }
-                Builder localBuilder2 = new Builder(this);
+                AlertDialog.Builder localBuilder2 = new AlertDialog.Builder(this);
                 localBuilder2.setMessage("本次操作要扣除1个点数，是否要继续？").setCancelable(false).setPositiveButton("确定", new OnClickListener() {
                     public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                         TDSMainActivity.this.submitPointDatas(i);
@@ -610,6 +618,7 @@ public class TDSMainActivity extends Activity {
 //        getWindow().setFlags(128, 128);
 //        requestWindowFeature(7);
         setContentView(R.layout.detect_main);
+        tdsMainActivity = this;
 //        getWindow().setFeatureInt(7, R.layout.custom_title);
 //        MyPreferManager.getInstance().init(getApplicationContext());
 //        long xianzhiTime = 1510904972000L;
@@ -686,6 +695,73 @@ public class TDSMainActivity extends Activity {
         ll_home5 = (LinearLayout) findViewById(R.id.ll_home5);
         ll_home6 = (LinearLayout) findViewById(R.id.ll_home6);
         setListener();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+        String isLogin = sharedPreferences.getString("isLogin", "0");
+        if (isLogin.equals("1")) {
+            String strAccount = sharedPreferences.getString("strAccount", "");
+            String strMD5Pwd = sharedPreferences.getString("strMD5Pwd", "");
+            String strPwd = sharedPreferences.getString("strPwd", "");
+
+            login(strAccount,strPwd,strMD5Pwd);
+        }else{
+            loginServer();
+        }
+    }
+
+    private void login(final String strAccount, final String strPwd, String strMD5Pwd) {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("加载中...");
+        Log.e("zj", "strAccount = " + strAccount + ",pwd = " + strMD5Pwd);
+        OkHttpUtils.get().tag(this)
+                .url(UrlApi.BaseUrl + UrlApi.Login)
+                .addParams("name", strAccount)
+                .addParams("pwd", strMD5Pwd)
+                .build().execute(new StringCallback() {
+            @Override
+            public void onBefore(Request request, int id) {
+                super.onBefore(request, id);
+                progressDialog.show();
+            }
+
+            @Override
+            public void onAfter(int id) {
+                super.onAfter(id);
+                if(progressDialog!=null){
+                    progressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                loginServer();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+
+                Log.e("zj", "response = " + response);
+                response = response.substring(2, response.length() - 2).replace("\\", "");
+                Login login = GsonUtils.INSTANCE.parseToBean(response, Login.class);
+                if (login != null) {
+                    if (login.isState()) {
+                        TDSMainActivity.this.mIsLoginServer = true;
+
+                        TDSMainActivity.this.mStrUID = strAccount;
+                        TDSMainActivity.this.mStrPWD = strPwd;
+                        String str3 = login.getNum() + "";
+                        TDSMainActivity.this.mStrReportUrl = login.getLink();
+                        TDSMainActivity.this.mLoginPoint = Integer.parseInt(str3 != null ? str3.trim() : "0");
+
+                    } else {
+                        loginServer();
+                    }
+                } else {
+                    loginServer();
+                }
+            }
+        });
     }
 
     private void setListener() {
@@ -720,18 +796,23 @@ public class TDSMainActivity extends Activity {
         ll_home5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TDSMainActivity.this.getReport();//获取报告
+                TDSMainActivity.this.getReport("取得报告");//获取报告
             }
         });
         ll_home6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("isLogin", "0");
+                editor.commit();
                 TDSMainActivity.this.finish();//退出系统
             }
         });
     }
 
     public void onDestroy() {
+        tdsMainActivity = null;
         super.onDestroy();
         if (this.mIsStart)
             this.mBoundService.stop();
@@ -789,7 +870,7 @@ public class TDSMainActivity extends Activity {
                     return;
                 case 2:
                     TDSMainActivity.this.mConnectedDeviceName = TDSMainActivity.this.mBoundService.getConnectedDeviceName();
-                    Toast.makeText(TDSMainActivity.this.getApplicationContext(), "Connected to " + TDSMainActivity.this.mConnectedDeviceName, Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(TDSMainActivity.this.getApplicationContext(), "Connected to " + TDSMainActivity.this.mConnectedDeviceName, Toast.LENGTH_SHORT).show();
                     return;
                 case 1:
                     switch (TDSMainActivity.this.mBoundService.getState()) {
