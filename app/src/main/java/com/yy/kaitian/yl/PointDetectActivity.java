@@ -19,6 +19,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -375,6 +376,7 @@ public class PointDetectActivity extends Activity {
 
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         Log.e("PointDetectActivity", "+++ ON CREATE +++");
         //getWindow().setFlags(128, 128);
         // requestWindowFeature(7);
@@ -392,6 +394,12 @@ public class PointDetectActivity extends Activity {
 //        this.mTitle = ((TextView) findViewById(R.id.title_left_text));
 //        this.mTitle.setText(arrayOfString[this.mCurrentPoint]);
         this.mTitle = ((TextView) findViewById(R.id.tv_right));
+        findViewById(R.id.ll_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         ((TextView) findViewById(R.id.tv_name)).setText(arrayOfString[this.mCurrentPoint]);
         ((TextView) findViewById(R.id.tv_id)).setText("" + (this.mCurrentPoint + 1) + "/24");

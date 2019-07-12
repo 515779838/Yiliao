@@ -153,7 +153,8 @@ public class TDSMainActivity extends Activity {
             getReport("智能解读");
             return;
         }
-        startActivityForResult(new Intent(this, PointDatasPreferenceActivity.class), MESSAGE_POINT_DATA_SELECT_RESULT);
+        // startActivityForResult(new Intent(this, PointDatasPreferenceActivity.class), MESSAGE_POINT_DATA_SELECT_RESULT);
+        startActivityForResult(new Intent(this, PointDatasPreference2Activity.class), MESSAGE_POINT_DATA_SELECT_RESULT);
     }
 
     //取得报告
@@ -208,18 +209,18 @@ public class TDSMainActivity extends Activity {
         AlertDialog.Builder localBuilder = new AlertDialog.Builder(this);
         localBuilder.setTitle("提示");
         if (paramInt == 0) {
-            localBuilder.setMessage(paramString).setCancelable(false).setPositiveButton("OK", new OnClickListener() {
+            localBuilder.setMessage(paramString).setCancelable(false).setPositiveButton("确定", new OnClickListener() {
                 public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                     paramAnonymousDialogInterface.cancel();
                 }
-            }).setNegativeButton("Cancel", new OnClickListener() {
+            }).setNegativeButton("取消", new OnClickListener() {
                 public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                 }
             });
             localBuilder.create().show();
             return;
         }
-        localBuilder.setMessage(paramString).setCancelable(false).setPositiveButton("OK", new OnClickListener() {
+        localBuilder.setMessage(paramString).setCancelable(false).setPositiveButton("确定", new OnClickListener() {
             public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                 paramAnonymousDialogInterface.cancel();
             }
@@ -244,7 +245,8 @@ public class TDSMainActivity extends Activity {
     //开始检测
 
     private void startPointDetect() {
-        startActivityForResult(new Intent(this, CustomerListPreferenceActivity.class), MESSAGE_CUSTOMER_SELECT_RESULT);
+        // startActivityForResult(new Intent(this, CustomerListPreferenceActivity.class), MESSAGE_CUSTOMER_SELECT_RESULT);
+        startActivityForResult(new Intent(this, CustomerListPreference2Activity.class), MESSAGE_CUSTOMER_SELECT_RESULT);
     }
 
     //提交点数据

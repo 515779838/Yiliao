@@ -40,11 +40,11 @@ public class ProfilesListActivity extends ListActivity {
 
     private void CancelAddCustomerProfile() {
         Builder localBuilder = new Builder(this);
-        localBuilder.setMessage("确定要退出?").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        localBuilder.setMessage("确定要退出?").setCancelable(false).setPositiveButton("确定", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                 ProfilesListActivity.this.finish();
             }
-        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                 paramAnonymousDialogInterface.cancel();
             }
@@ -173,11 +173,11 @@ public class ProfilesListActivity extends ListActivity {
             case R.id.new_profiles_cancel:
         }
         Builder localBuilder = new Builder(this);
-        localBuilder.setMessage("确定要退出?").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        localBuilder.setMessage("确定要退出?").setCancelable(false).setPositiveButton("确定", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                 ProfilesListActivity.this.finish();
             }
-        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                 paramAnonymousDialogInterface.cancel();
             }

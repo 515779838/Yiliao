@@ -10,56 +10,59 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/CustomTheme">
-
+        android:theme="@style/CustomTheme"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name="com.yy.kaitian.yl.TDSMainActivity"
+            android:name=".TDSMainActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.yy.kaitian.yl.DeviceListActivity"
+            android:name=".DeviceListActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/select_device"
             android:theme="@style/CustomDialogTheme2" />
         <activity
-            android:name="com.yy.kaitian.yl.WebViewActivity"
+            android:name=".WebViewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name="com.yy.kaitian.yl.ImageViewActivity"
+            android:name=".ImageViewActivity"
             android:screenOrientation="portrait" />
         <activity android:name="org.achartengine.GraphicalActivity" />
-        <activity android:name="com.yy.kaitian.yl.LoginRemoteServerActivity" />
-        <activity android:name="com.yy.kaitian.yl.CustomerProfilesEditActivity" />
-        <activity android:name="com.yy.kaitian.yl.ProfilesListActivity" />
-        <activity android:name="com.yy.kaitian.yl.ProfileDetailActivity" />
+        <activity android:name=".LoginRemoteServerActivity" />
+        <activity android:name=".CustomerProfilesEditActivity" />
+        <activity android:name=".ProfilesListActivity" />
+        <activity android:name=".ProfileDetailActivity" />
         <activity
-            android:name="com.yy.kaitian.yl.DetectMainActivity"
+            android:name=".DetectMainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yy.kaitian.yl.PointDetectActivity"
+            android:name=".PointDetectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yy.kaitian.yl.DeviceManageActivity"
+            android:name=".DeviceManageActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yy.kaitian.yl.PointDatasPreferenceActivity" />
-        <activity android:name="com.yy.kaitian.yl.CustomerListPreferenceActivity" />
+        <activity android:name=".PointDatasPreferenceActivity" />
+        <activity android:name=".CustomerListPreferenceActivity" />
         <activity
-            android:name="com.yy.kaitian.yl.DeviceCheckActivity"
+            android:name=".DeviceCheckActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yy.kaitian.yl.WriteSNActivity" />
+        <activity android:name=".WriteSNActivity" />
 
-        <service android:name="com.yy.kaitian.yl.TDSService" />
+        <service android:name=".TDSService" />
+
+        <activity android:name=".CustomerListPreference2Activity" />
+        <activity android:name=".PointDatasPreference2Activity"></activity>
     </application>
 
 </manifest>

@@ -31,11 +31,11 @@ public class PointDatasPreferenceActivity extends PreferenceActivity {
 
     private void DeleteIntelege() {
         Builder localBuilder = new Builder(this);
-        localBuilder.setMessage("确定要删除用户记录?").setCancelable(false).setPositiveButton("Yes", new OnClickListener() {
+        localBuilder.setMessage("确定要删除用户记录?").setCancelable(false).setPositiveButton("确定", new OnClickListener() {
             public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                 PointDatasPreferenceActivity.this.delUserPointData();
             }
-        }).setNegativeButton("No", new OnClickListener() {
+        }).setNegativeButton("取消", new OnClickListener() {
             public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                 paramAnonymousDialogInterface.cancel();
                 PointDatasPreferenceActivity.this.selected.setChecked(false);

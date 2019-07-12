@@ -88,14 +88,14 @@ public class ProfileDetailActivity extends PreferenceActivity
     case R.id.profiles_detail_delete:
     }
     Builder localBuilder = new Builder(this);
-    localBuilder.setMessage("确定要删除?").setCancelable(false).setPositiveButton("Yes", new OnClickListener()
+    localBuilder.setMessage("确定要删除?").setCancelable(false).setPositiveButton("确定", new OnClickListener()
     {
       public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
       {
         if (ProfileDetailActivity.this.delProfileById(ProfileDetailActivity.this.mId))
           ProfileDetailActivity.this.finish();
       }
-    }).setNegativeButton("No", new OnClickListener()
+    }).setNegativeButton("取消", new OnClickListener()
     {
       public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
       {

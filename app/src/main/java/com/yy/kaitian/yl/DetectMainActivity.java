@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -217,13 +218,13 @@ public class DetectMainActivity extends Activity {
                             DetectMainActivity.this.mHandler.sendMessageDelayed(localMessage, 300L);
                         }
                     };
-                    AlertDialog.Builder localBuilder3 = localBuilder2.setPositiveButton("OK", local5);
+                    AlertDialog.Builder localBuilder3 = localBuilder2.setPositiveButton("确定", local5);
                     DialogInterface.OnClickListener local6 = new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                             paramAnonymousDialogInterface.cancel();
                         }
                     };
-                    localBuilder3.setNegativeButton("Cancel", local6);
+                    localBuilder3.setNegativeButton("取消", local6);
                     localBuilder1.create().show();
                     return;
                 }
@@ -305,6 +306,7 @@ public class DetectMainActivity extends Activity {
         // getWindow().setFlags(128, 128);
         // requestWindowFeature(7);
         setContentView(R.layout.detect_main2);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         // getWindow().setFeatureInt(7, R.layout.custom_title_device_manage);
         new Bundle();
         Bundle localBundle = getIntent().getExtras();

@@ -104,13 +104,13 @@ public class CustomerProfilesEditActivity extends Activity {
 //    if (this.mbModify);
         for (String str = "确定要修改客户档案?"; ; str = "确定要新增客户档案?") {
             Builder localBuilder = new Builder(this);
-            localBuilder.setMessage(str).setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            localBuilder.setMessage(str).setCancelable(false).setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                     CustomerProfilesEditActivity.this.mRegisterTime = CustomerProfilesEditActivity.this.myGetCurrentTime();
                     if (CustomerProfilesEditActivity.this.addNewCustomerProfiles() == 0)
                         CustomerProfilesEditActivity.this.finish();
                 }
-            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                     paramAnonymousDialogInterface.cancel();
                 }
@@ -122,11 +122,11 @@ public class CustomerProfilesEditActivity extends Activity {
 
     private void CancelAddNewProfile() {
         Builder localBuilder = new Builder(this);
-        localBuilder.setMessage("确定要退出客户档案的编辑?").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        localBuilder.setMessage("确定要退出客户档案的编辑?").setCancelable(false).setPositiveButton("确定", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                 CustomerProfilesEditActivity.this.finish();
             }
-        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                 paramAnonymousDialogInterface.cancel();
             }
@@ -136,12 +136,12 @@ public class CustomerProfilesEditActivity extends Activity {
 
     private void DelCustomerPrifile() {
         Builder localBuilder = new Builder(this);
-        localBuilder.setMessage("确定要删除?").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        localBuilder.setMessage("确定要删除?").setCancelable(false).setPositiveButton("确定", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                 if (CustomerProfilesEditActivity.this.delProfileById(CustomerProfilesEditActivity.this.mId))
                     CustomerProfilesEditActivity.this.finish();
             }
-        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                 paramAnonymousDialogInterface.cancel();
             }
@@ -454,9 +454,17 @@ public class CustomerProfilesEditActivity extends Activity {
             this.mCustomerPrifiles = new CustomerProfilesClass();
         Log.e("zj", " new add");
         if (localBundle.getString("customer_profile_edit_type").equals("Modify")) {
-             this.tv_save.setText(R.string.modify);
+            this.tv_save.setText(R.string.modify);
+            findViewById(R.id.tv_delete).setVisibility(View.VISIBLE);
+            findViewById(R.id.tv_delete).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DelCustomerPrifile();
+                }
+            });
         } else {
             this.tv_save.setText(R.string.new_save);
+            findViewById(R.id.tv_delete).setVisibility(View.GONE);
         }
     }
 
@@ -692,11 +700,11 @@ public class CustomerProfilesEditActivity extends Activity {
     public boolean onKeyDown(int paramInt, KeyEvent paramKeyEvent) {
         if (paramInt == 4) {
             Builder localBuilder = new Builder(this);
-            localBuilder.setMessage("当前记录未保存，是否要退出?").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            localBuilder.setMessage("当前记录未保存，是否要退出?").setCancelable(false).setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                     CustomerProfilesEditActivity.this.finish();
                 }
-            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                     paramAnonymousDialogInterface.cancel();
                 }
@@ -714,13 +722,13 @@ public class CustomerProfilesEditActivity extends Activity {
             case R.id.new_profiles_add:
                 String str = mbModify ? "确定要修改客户档案?" : "确定要新增客户档案?";
                 Builder localBuilder2 = new Builder(this);
-                localBuilder2.setMessage(str).setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                localBuilder2.setMessage(str).setCancelable(false).setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                         CustomerProfilesEditActivity.this.mRegisterTime = CustomerProfilesEditActivity.this.myGetCurrentTime();
                         if (CustomerProfilesEditActivity.this.addNewCustomerProfiles() == 0)
                             CustomerProfilesEditActivity.this.finish();
                     }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                         paramAnonymousDialogInterface.cancel();
                     }
@@ -729,11 +737,11 @@ public class CustomerProfilesEditActivity extends Activity {
                 return true;
             case R.id.new_profiles_cancel:
                 Builder localBuilder1 = new Builder(this);
-                localBuilder1.setMessage("确定要退出客户档案的编辑?").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                localBuilder1.setMessage("确定要退出客户档案的编辑?").setCancelable(false).setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                         CustomerProfilesEditActivity.this.finish();
                     }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                         paramAnonymousDialogInterface.cancel();
                     }

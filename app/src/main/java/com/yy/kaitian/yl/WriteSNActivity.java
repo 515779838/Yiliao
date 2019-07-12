@@ -163,7 +163,7 @@ public class WriteSNActivity extends Activity
   {
     Builder localBuilder = new Builder(this);
     localBuilder.setTitle("提示");
-    localBuilder.setMessage(paramString).setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener()
+    localBuilder.setMessage(paramString).setCancelable(false).setPositiveButton("确定", new DialogInterface.OnClickListener()
     {
       public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
       {
