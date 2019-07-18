@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -117,6 +118,7 @@ public class LoginRemoteServerActivity extends Activity {
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         setContentView(R.layout.login);
+
         this.viewline1 = findViewById(R.id.viewline1);
         this.viewline2 = findViewById(R.id.viewline2);
 

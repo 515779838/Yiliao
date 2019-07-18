@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -29,6 +30,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.MessageFormat;
 import java.util.Calendar;
 
 public class DeviceManageActivity extends Activity {
@@ -78,16 +80,25 @@ public class DeviceManageActivity extends Activity {
     private TDSServiceReceiver mReceiver;
 
     private ProgressDialog progressDialog;
+    private String macStr = "";
+    private int cNum = 0;
 
     private void connectDevice(Intent paramIntent, boolean paramBoolean) {
-        progressDialog.setMessage("连接中...");
+        if (cNum == 0) {
+            progressDialog.setMessage("连接中...");
+        } else {
+            progressDialog.setMessage(MessageFormat.format("第{0}次自动连接中...", cNum));
+        }
         progressDialog.show();
         String str = paramIntent.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+        macStr = str;
         BluetoothDevice localBluetoothDevice = this.mBluetoothAdapter.getRemoteDevice(str);
         this.mBoundService.connect(localBluetoothDevice, paramBoolean);
     }
 
     private void disConnectDevice() {
+        Log.e("cyf123", "33333333333   ");
+        saveMacStr("");
         if (this.mIsBound)
             this.mBoundService.stop();
     }
@@ -181,14 +192,22 @@ public class DeviceManageActivity extends Activity {
                 return;
             case 3:
                 progressDialog.dismiss();
+                if ("".equals(macStr)) {
+                    if (cNum != 0) {
+                        tryCon();
+                    }
+                    return;
+                }
                 this.mConnectedDeviceName = this.mBoundService.getConnectedDeviceName();
                 String str3 = getResources().getString(R.string.title_connected_to);
                 this.mConversationArrayAdapter.add(str1 + str3 + this.mConnectedDeviceName);
                 String str4 = "SN=" + this.mBoundService.mTDSDetect.GetSerialNumber();
                 this.mConversationArrayAdapter.add(str1 + str4);
 
-                ((TextView)findViewById(R.id.tv_name)).setText(DeviceManageActivity.this.mConnectedDeviceName);
+                ((TextView) findViewById(R.id.tv_name)).setText(DeviceManageActivity.this.mConnectedDeviceName);
                 findViewById(R.id.ll_main2).setVisibility(View.VISIBLE);
+                Log.e("cyf123", "222222222   ");
+                saveMacStr(macStr);
                 return;
             case 2:
                 String str2 = getResources().getString(R.string.title_connecting);
@@ -224,6 +243,7 @@ public class DeviceManageActivity extends Activity {
         switch (paramInt1) {
             case REQUEST_CONNECT_DEVICE_SECURE:
                 if (paramInt2 == -1) {
+                    cNum = 0;
                     connectDevice(paramIntent, true);
                 } else {
                     connectDevice(paramIntent, false);
@@ -342,6 +362,8 @@ public class DeviceManageActivity extends Activity {
         doRegisterReceiver();
         Message localMessage = this.mHandler.obtainMessage(MESSAGE_RIGHT_TITLE_SET);
         this.mHandler.sendMessageDelayed(localMessage, 1000L);
+
+        tryCon();
     }
 
     public void onStop() {
@@ -398,10 +420,15 @@ public class DeviceManageActivity extends Activity {
                             DeviceManageActivity.this.mHandler.sendMessageDelayed(localMessage, 1000L);
                             Toast.makeText(DeviceManageActivity.this, str5 + DeviceManageActivity.this.mConnectedDeviceName, Toast.LENGTH_SHORT).show();
 
-                            ((TextView)findViewById(R.id.tv_name)).setText(DeviceManageActivity.this.mConnectedDeviceName);
+                            ((TextView) findViewById(R.id.tv_name)).setText(DeviceManageActivity.this.mConnectedDeviceName);
                             findViewById(R.id.ll_main2).setVisibility(View.VISIBLE);
+                            Log.e("cyf123", "1111111111   ");
+                            saveMacStr(macStr);
                             break;
                         default:
+                            if (cNum != 0) {
+                                tryCon();
+                            }
                             progressDialog.dismiss();
                             String strFail = DeviceManageActivity.this.getResources().getString(R.string.title_can_not_connect);
                             DeviceManageActivity.this.mConversationArrayAdapter.add(str1 + strFail);
@@ -412,6 +439,9 @@ public class DeviceManageActivity extends Activity {
 
                     return;
                 case 3:
+                    if (cNum != 0) {
+                        tryCon();
+                    }
                     progressDialog.dismiss();
                     String str4 = DeviceManageActivity.this.getResources().getString(R.string.title_can_not_connect);
                     DeviceManageActivity.this.mConversationArrayAdapter.add(str1 + str4);
@@ -437,5 +467,35 @@ public class DeviceManageActivity extends Activity {
             }
         }
     }
+
+    private void tryCon() {
+        // 自动连接
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                cNum++;
+                if (cNum == 4) {
+                    cNum = 0;
+                    return;
+                }
+                SharedPreferences preferences = getSharedPreferences("dma", Context.MODE_PRIVATE);
+                String mMacStr = preferences.getString("macStr", "");
+                if (!"".equals(mMacStr)) {
+                    Intent intent = new Intent();
+                    intent.putExtra(DeviceListActivity.EXTRA_DEVICE_ADDRESS, mMacStr);
+                    connectDevice(intent, true);
+                }
+            }
+        }, 1100);
+    }
+
+    private void saveMacStr(String macStr) {
+        Log.e("cyf123", "macStr   " + macStr);
+        SharedPreferences preferences = getSharedPreferences("dma", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("macStr", macStr);
+        editor.commit();
+    }
+
 }
 
