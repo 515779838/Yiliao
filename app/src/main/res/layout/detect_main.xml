@@ -10,7 +10,7 @@
         android:layout_height="117dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
-        android:text="YHN远程健康检测系统"
+        android:text="富勒智能健康系统"
         android:textColor="@color/white"
         android:textSize="24sp" />
 
@@ -32,12 +32,52 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/ll_home1"
+                    android:id="@+id/ll_home2"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_marginLeft="48dp"
-                    android:layout_marginTop="31dp"
+                    android:layout_marginTop="12dp"
                     android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_home1"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="24dp"
+                    android:translationZ="4dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@mipmap/ic_home_item_02" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="连接设备"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Equipment manage"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_home1"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="48dp"
                     android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_home1"
@@ -52,57 +92,26 @@
                         android:layout_height="28dp"
                         android:src="@mipmap/ic_home_item_01" />
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="39dp"
+                        android:layout_height="wrap_content"
                         android:text="用户管理"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="15dp"
+                        android:layout_height="wrap_content"
                         android:text="User manage"
                         android:textColor="@color/white"
                         android:textSize="11sp" />
-                </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_home2"
-                    android:layout_width="0dp"
-                    android:layout_height="150dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="31dp"
-                    android:layout_marginRight="48dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_home1"
-                    android:orientation="vertical"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="24dp"
-                    android:paddingBottom="24dp"
-                    android:translationZ="4dp">
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@mipmap/ic_home_item_02" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="39dp"
-                        android:text="设备管理"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Equipment manage"
-                        android:textColor="@color/white"
-                        android:textSize="11sp" />
                 </LinearLayout>
 
 
@@ -135,10 +144,14 @@
                         android:layout_height="28dp"
                         android:src="@mipmap/ic_home_item_03" />
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="39dp"
                         android:text="开始检测"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
@@ -172,10 +185,14 @@
                         android:layout_height="28dp"
                         android:src="@mipmap/ic_home_item_04" />
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="39dp"
                         android:text="智能解读"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
@@ -201,11 +218,11 @@
                 <LinearLayout
                     android:id="@+id/ll_home5"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="150dp"
                     android:layout_marginLeft="48dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="4dp"
-                    android:layout_marginBottom="31dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_home3"
                     android:orientation="vertical"
@@ -219,10 +236,14 @@
                         android:layout_height="28dp"
                         android:src="@mipmap/ic_home_item_05" />
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="39dp"
                         android:text="取得报告"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
@@ -242,9 +263,9 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="48dp"
-                    android:layout_marginBottom="31dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_home4"
+                    android:background="@drawable/bg_home3"
                     android:elevation="3dp"
                     android:gravity="center"
                     android:orientation="vertical"
@@ -261,7 +282,7 @@
                         android:layout_marginTop="8dp"
                         android:gravity="center"
                         android:text="退出系统"
-                        android:textColor="@color/color_66"
+                        android:textColor="@color/white"
                         android:textSize="14sp" />
 
 

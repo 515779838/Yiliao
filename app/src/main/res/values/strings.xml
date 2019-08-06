@@ -23,7 +23,7 @@
     <string name="customer_register_time">登记时间</string>
     <string name="customer_detect_time">最近检测时间</string>
     <string name="hello">Hello World, YHNTestActivity!</string>
-    <string name="app_name">YHN远程健康检测系统</string>
+    <string name="app_name">富勒健康</string>
     <string name="send">Send</string>
     <string name="not_connected">你还没有连接设备</string>
     <string name="bt_not_enabled_leaving">蓝牙设备未开启. 退出.</string>

@@ -47,7 +47,7 @@ public class CustomerProfilesEditActivity extends Activity {
 //            CustomerProfilesEditActivity.this.btnChangeDate.setText(CustomerProfilesEditActivity.this.mBirthday);
 //        }
 //    };
-    private int day;
+
     private String mBirthday;
     private CustomerProfilesClass mCustomerPrifiles = null;
     private String mDetectTime;
@@ -62,9 +62,9 @@ public class CustomerProfilesEditActivity extends Activity {
     private String mHeight;
     private int mId;
     private String mMaritalStatus;
-    private String mMedicalHistory1;
-    private String mMedicalHistory2;
-    private String mMedicalHistory3;
+//    private String mMedicalHistory1;
+//    private String mMedicalHistory2;
+//    private String mMedicalHistory3;
     private String mMemo;//客服ID
     private String mName;
     private String mNativePlace;
@@ -82,9 +82,9 @@ public class CustomerProfilesEditActivity extends Activity {
     private String mSystolicPressure;
     private String mWeight;
     private boolean mbModify;//是否修改
-    private int month;
-    private int year;
-
+//    private int month;
+//    private int year;
+//    private int day;
 
     private TextView tv_save;
     private LinearLayout ll_back;
@@ -93,7 +93,7 @@ public class CustomerProfilesEditActivity extends Activity {
     private TextView tv_unmarried, tv_married;
     private boolean isMale = true;
     private boolean isUnmarried = true;
-    private EditText et_ChangeDate;
+    private EditText et_year, et_month, et_day;
 
     private WheelView wv;
     private int selectType = 0;// 0籍贯，1职业，2病史1，3病史2，4病史3
@@ -150,6 +150,8 @@ public class CustomerProfilesEditActivity extends Activity {
     }
 
     private int addNewCustomerProfiles() {
+        this.mBirthday = (this.et_year.getText().toString() + "-" + this.et_month.getText().toString() + "-" + this.et_day.getText().toString());
+
         this.mName = this.mEditName.getText().toString();
         if (this.mName.length() == 0) {
             myPrompt("请输入名称！");
@@ -215,9 +217,9 @@ public class CustomerProfilesEditActivity extends Activity {
             return -1;
         }
 
-        this.mMedicalHistory1 = ((TextView) findViewById(R.id.tv_customer_medical_history1)).getText().toString();
-        this.mMedicalHistory2 = ((TextView) findViewById(R.id.tv_customer_medical_history2)).getText().toString();
-        this.mMedicalHistory3 = ((TextView) findViewById(R.id.tv_customer_medical_history3)).getText().toString();
+//        this.mMedicalHistory1 = ((TextView) findViewById(R.id.tv_customer_medical_history1)).getText().toString();
+//        this.mMedicalHistory2 = ((TextView) findViewById(R.id.tv_customer_medical_history2)).getText().toString();
+//        this.mMedicalHistory3 = ((TextView) findViewById(R.id.tv_customer_medical_history3)).getText().toString();
 
 
         this.mMemo = this.mEditMemo.getText().toString();
@@ -229,7 +231,8 @@ public class CustomerProfilesEditActivity extends Activity {
             myPrompt("客户ID输入错误，请输入字母和数字！");
             return -1;
         }
-        Log.e("zj", "mMame=" + this.mName + " birthday=" + this.mBirthday + " mNativePlace=" + this.mNativePlace + " mProfession=" + this.mProfession + " mSex=" + this.mSex + " mMaritalStatus=" + this.mMaritalStatus + " mHeight=" + this.mHeight + " mWeight=" + this.mWeight + " mSystolicPressure=" + this.mSystolicPressure + " mDiastolicPressure=" + this.mDiastolicPressure + " mPulse=" + this.mPulse + " mMedicalHistory1=" + this.mMedicalHistory1 + " mMedicalHistory2=" + this.mMedicalHistory2 + " mMedicalHistory3=" + this.mMedicalHistory3 + " mMemo=" + this.mMemo);
+        Log.e("zj", "mMame=" + this.mName + " birthday=" + this.mBirthday + " mNativePlace=" + this.mNativePlace + " mProfession=" + this.mProfession + " mSex=" + this.mSex + " mMaritalStatus=" + this.mMaritalStatus + " mHeight=" + this.mHeight + " mWeight=" + this.mWeight + " mSystolicPressure=" + this.mSystolicPressure + " mDiastolicPressure=" + this.mDiastolicPressure + " mPulse=" + this.mPulse + " mMedicalHistory1=" + " mMedicalHistory2="  + " mMedicalHistory3=" + " mMemo=" + this.mMemo);
+//        Log.e("zj", "mMame=" + this.mName + " birthday=" + this.mBirthday + " mNativePlace=" + this.mNativePlace + " mProfession=" + this.mProfession + " mSex=" + this.mSex + " mMaritalStatus=" + this.mMaritalStatus + " mHeight=" + this.mHeight + " mWeight=" + this.mWeight + " mSystolicPressure=" + this.mSystolicPressure + " mDiastolicPressure=" + this.mDiastolicPressure + " mPulse=" + this.mPulse + " mMedicalHistory1=" + this.mMedicalHistory1 + " mMedicalHistory2=" + this.mMedicalHistory2 + " mMedicalHistory3=" + this.mMedicalHistory3 + " mMemo=" + this.mMemo);
         this.mCustomerPrifiles.setName(this.mName);
         this.mCustomerPrifiles.setBirthday(this.mBirthday);
         this.mCustomerPrifiles.setNativePlace(this.mNativePlace);
@@ -241,9 +244,9 @@ public class CustomerProfilesEditActivity extends Activity {
         this.mCustomerPrifiles.setPulse(this.mPulse);
         this.mCustomerPrifiles.setSex(this.mSex);
         this.mCustomerPrifiles.setMaritalStatus(this.mMaritalStatus);
-        this.mCustomerPrifiles.setMedicalHistory1(this.mMedicalHistory1);
-        this.mCustomerPrifiles.setMedicalHistory2(this.mMedicalHistory2);
-        this.mCustomerPrifiles.setMedicalHistory3(this.mMedicalHistory3);
+//        this.mCustomerPrifiles.setMedicalHistory1(this.mMedicalHistory1);
+//        this.mCustomerPrifiles.setMedicalHistory2(this.mMedicalHistory2);
+//        this.mCustomerPrifiles.setMedicalHistory3(this.mMedicalHistory3);
         this.mCustomerPrifiles.setMemo(this.mMemo);
         this.mCustomerPrifiles.setRegisterTime(this.mRegisterTime);
         MyDatabaseHandler localMyDatabaseHandler = new MyDatabaseHandler(this);
@@ -295,7 +298,7 @@ public class CustomerProfilesEditActivity extends Activity {
         tv_female = ((TextView) findViewById(R.id.tv_female));
         tv_unmarried = ((TextView) findViewById(R.id.tv_unmarried));
         tv_married = ((TextView) findViewById(R.id.tv_married));
-        et_ChangeDate = ((EditText) findViewById(R.id.et_ChangeDate));
+//        et_ChangeDate = ((EditText) findViewById(R.id.et_ChangeDate));
         datePicker = (DatePicker) findViewById(R.id.datePicker);
         try {
             View view1 = ((ViewAnimator) ((ScrollView) ((LinearLayout) datePicker.getChildAt(0)).getChildAt(1)).getChildAt(0)).getChildAt(0);
@@ -315,14 +318,20 @@ public class CustomerProfilesEditActivity extends Activity {
         ((TextView) findViewById(R.id.tv_customer_medical_history3)).setText(arrayOfString3[0]);
 
         this.mEditName = ((EditText) findViewById(R.id.customer_name_edit));
+
+        this.et_year = ((EditText) findViewById(R.id.et_year));
+        this.et_month = ((EditText) findViewById(R.id.et_month));
+        this.et_day = ((EditText) findViewById(R.id.et_day));
         Calendar localCalendar = Calendar.getInstance();
-        this.year = localCalendar.get(Calendar.YEAR);
-        this.month = localCalendar.get(Calendar.MONTH);
-        this.day = localCalendar.get(Calendar.DAY_OF_MONTH);
-        this.mBirthday = (this.year + "-" + (1 + this.month) + "-" + this.day);
+//        this.year = localCalendar.get(Calendar.YEAR);
+//        this.month = localCalendar.get(Calendar.MONTH);
+//        this.day = localCalendar.get(Calendar.DAY_OF_MONTH);
+//        this.mBirthday = (this.year + "-" + (1 + this.month) + "-" + this.day);
 //        this.btnChangeDate = ((Button) findViewById(R.id.btnChangeDate));
 //        this.btnChangeDate.setText(this.mBirthday);
-        ((EditText) findViewById(R.id.et_ChangeDate)).setText(this.mBirthday);
+//        ((EditText) findViewById(R.id.et_year)).setText(this.year);
+//        ((EditText) findViewById(R.id.et_month)).setText(this.month);
+//        ((EditText) findViewById(R.id.et_day)).setText(this.day);
 
         this.mNativeSpinner = ((Spinner) findViewById(R.id.customer_native_place_spinner));
         this.mProfessionSpinner = ((Spinner) findViewById(R.id.customer_profession_spinner));
@@ -366,6 +375,12 @@ public class CustomerProfilesEditActivity extends Activity {
             this.mName = localCustomerProfilesClass.getName();
             this.mEditName.setText(this.mName);
             this.mBirthday = localCustomerProfilesClass.getBirthday();
+
+            String[] temp = null;
+            temp = this.mBirthday.split("-");
+            this.et_year.setText(temp[0]);
+            this.et_month.setText(temp[1]);
+            this.et_day.setText(temp[2]);
 //            this.btnChangeDate.setText(this.mBirthday);
             this.mNativePlace = localCustomerProfilesClass.getNativePlace();
             this.mProfession = localCustomerProfilesClass.getProfession();
@@ -414,16 +429,17 @@ public class CustomerProfilesEditActivity extends Activity {
             this.mRegisterTime = localCustomerProfilesClass.getRegisterTime();
             this.mDetectTime = localCustomerProfilesClass.getDetectTime();
 
-            this.mMedicalHistory1 = localCustomerProfilesClass.getMedicalHistory1();
-//      arrayOfString3 = getResources().getStringArray(R.array.medical_history_arrays);
-            this.mMedicalHistory2 = localCustomerProfilesClass.getMedicalHistory2();
-            this.mMedicalHistory3 = localCustomerProfilesClass.getMedicalHistory3();
+            //      arrayOfString3 = getResources().getStringArray(R.array.medical_history_arrays);
+
+//            this.mMedicalHistory1 = localCustomerProfilesClass.getMedicalHistory1();
+//            this.mMedicalHistory2 = localCustomerProfilesClass.getMedicalHistory2();
+//            this.mMedicalHistory3 = localCustomerProfilesClass.getMedicalHistory3();
 
             ((TextView) findViewById(R.id.tv_address)).setText(this.mNativePlace);
             ((TextView) findViewById(R.id.tv_profession)).setText(this.mProfession);
-            ((TextView) findViewById(R.id.tv_customer_medical_history1)).setText(this.mMedicalHistory1);
-            ((TextView) findViewById(R.id.tv_customer_medical_history2)).setText(this.mMedicalHistory2);
-            ((TextView) findViewById(R.id.tv_customer_medical_history3)).setText(this.mMedicalHistory3);
+//            ((TextView) findViewById(R.id.tv_customer_medical_history1)).setText(this.mMedicalHistory1);
+//            ((TextView) findViewById(R.id.tv_customer_medical_history2)).setText(this.mMedicalHistory2);
+//            ((TextView) findViewById(R.id.tv_customer_medical_history3)).setText(this.mMedicalHistory3);
         } else {
             Toast.makeText(this, "读取数据失败!", Toast.LENGTH_SHORT).show();
         }
@@ -471,6 +487,22 @@ public class CustomerProfilesEditActivity extends Activity {
     private void setListenter() {
         this.tv_save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View paramAnonymousView) {
+                if (et_year.getText().toString().length() == 0) {
+                    myPrompt("请输入年份！");
+                    return;
+                }
+
+                if (et_month.getText().toString().length() == 0) {
+                    myPrompt("请输入月份！");
+                    return;
+                }
+
+                if (et_day.getText().toString().length() == 0) {
+                    myPrompt("请输入日期！");
+                    return;
+                }
+
+
                 CustomerProfilesEditActivity.this.AddNewProfile();
             }
         });
@@ -659,28 +691,28 @@ public class CustomerProfilesEditActivity extends Activity {
                 }
             }
         });
-        findViewById(R.id.et_ChangeDate).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+//        findViewById(R.id.et_ChangeDate).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+////                datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+////                    @Override
+////                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+////                        ((EditText) findViewById(R.id.et_ChangeDate)).setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+////                    }
+////                });
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(CustomerProfilesEditActivity.this, R.style.CustomDialogTheme, new DatePickerDialog.OnDateSetListener() {
 //                    @Override
-//                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                        CustomerProfilesEditActivity.this.year = year;
+//                        CustomerProfilesEditActivity.this.month = monthOfYear;
+//                        CustomerProfilesEditActivity.this.day = dayOfMonth;
 //                        ((EditText) findViewById(R.id.et_ChangeDate)).setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 //                    }
-//                });
-                DatePickerDialog datePickerDialog = new DatePickerDialog(CustomerProfilesEditActivity.this, R.style.CustomDialogTheme, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        CustomerProfilesEditActivity.this.year = year;
-                        CustomerProfilesEditActivity.this.month = monthOfYear;
-                        CustomerProfilesEditActivity.this.day = dayOfMonth;
-                        ((EditText) findViewById(R.id.et_ChangeDate)).setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-                    }
-                }, year, month, day);
-                datePickerDialog.show();
-            }
-        });
+//                }, year, month, day);
+//                datePickerDialog.show();
+//            }
+//        });
     }
 
     protected Dialog onCreateDialog(int paramInt) {

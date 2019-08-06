@@ -21,6 +21,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 
 public class DetectMainActivity extends Activity {
@@ -65,6 +66,13 @@ public class DetectMainActivity extends Activity {
                     //DetectMainActivity.this.mTitle.setText("未检穴位数:" + DetectMainActivity.this.mUnFinishPointNum + "  客户名称:" + DetectMainActivity.this.mCustomerName);
                     ((TextView) findViewById(R.id.tv_name)).setText("客户名称:" + DetectMainActivity.this.mCustomerName);
                     ((TextView) findViewById(R.id.tv_num)).setText("未检穴位数:" + DetectMainActivity.this.mUnFinishPointNum);
+
+                    try {
+                        TDSMainActivity.tdsMainActivity.getIntelligentReading();
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    finish();
                     break;
             }
 //            do {

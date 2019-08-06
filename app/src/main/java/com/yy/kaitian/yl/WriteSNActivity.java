@@ -156,7 +156,7 @@ public class WriteSNActivity extends Activity
     case 2:
     }
     this.mTitle.setText(R.string.title_not_connected);
-    showAlertDlg("设备未连接，\n请在【设备管理】中连接设备");
+    showAlertDlg("设备未连接，\n请在【连接设备】中连接设备");
   }
 
   private void showAlertDlg(String paramString)
@@ -296,7 +296,7 @@ public class WriteSNActivity extends Activity
         case 0:
         case 1:
           WriteSNActivity.this.mTitle.setText(R.string.title_not_connected);
-          WriteSNActivity.this.showAlertDlg("设备未连接，\n请在【设备管理】中连接设备");
+          WriteSNActivity.this.showAlertDlg("设备未连接，\n请在【连接管理】中连接设备");
           return;
         case 3:
           WriteSNActivity.this.mTitle.setText(R.string.title_connected_to);
@@ -308,7 +308,7 @@ public class WriteSNActivity extends Activity
         return;
       case 3:
         WriteSNActivity.this.mTitle.setText(R.string.title_not_connected);
-        WriteSNActivity.this.showAlertDlg("设备连接失败，\n请在【设备管理】中重新连接设备");
+        WriteSNActivity.this.showAlertDlg("设备连接失败，\n请在【连接管理】中重新连接设备");
         WriteSNActivity.this.mDeviceState = 0;
         return;
       case 4:

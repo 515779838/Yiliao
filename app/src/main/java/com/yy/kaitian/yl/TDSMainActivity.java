@@ -143,7 +143,7 @@ public class TDSMainActivity extends Activity {
     }
 
     //智能解读
-    private void getIntelligentReading()
+    public  void getIntelligentReading()
             throws UnsupportedEncodingException {
         if (!this.mIsLoginServer) {
             showAlertDlg("您未登录系统，\n请在【登录系统】中登录", 1);
@@ -351,6 +351,8 @@ public class TDSMainActivity extends Activity {
             builder.append("ф");
             builder.append(localPointDetectData.getPointValue(i));
         }
+
+        Log.e("zj","builder = "+builder.toString());
         AppLog.instance().d(builder.toString());
         OkHttpUtils.get().tag(this)
                 .url(UrlApi.BaseUrl + UrlApi.up_date)
@@ -363,6 +365,7 @@ public class TDSMainActivity extends Activity {
 
             @Override
             public void onResponse(String response, int id) {
+                Log.e("zj","111111");
                 response = response.substring(2, response.length() - 2).replace("\\", "");
                 UpDate upDate = GsonUtils.INSTANCE.parseToBean(response, UpDate.class);
                 if (upDate != null) {
@@ -789,7 +792,7 @@ public class TDSMainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 try {
-                    TDSMainActivity.this.getIntelligentReading();//智能解读
+                    TDSMainActivity.this.getIntelligentReading() ;//智能解读
                 } catch (UnsupportedEncodingException localUnsupportedEncodingException) {
                     localUnsupportedEncodingException.printStackTrace();
                 }

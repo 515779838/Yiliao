@@ -48,8 +48,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
+                        android:textSize="12sp"
                         android:gravity="center_vertical"
-                        android:text="欢迎来到YHN远程健康检测系统"
+                        android:text="欢迎来到富勒智能健康系统"
                         android:textColor="@color/color_66" />
 
 
@@ -78,7 +79,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/transparent"
-                    android:text="yh01103042"
+                    android:text=""
                     android:textColor="@color/color_66"
                     android:textSize="16sp" />
 
@@ -111,7 +112,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/transparent"
-                    android:text="ke22pk49"
+                    android:text=""
                     android:textColor="@color/color_66"
                     android:textSize="16sp" />
 

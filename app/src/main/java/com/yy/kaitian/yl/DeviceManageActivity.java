@@ -84,12 +84,12 @@ public class DeviceManageActivity extends Activity {
     private int cNum = 0;
 
     private void connectDevice(Intent paramIntent, boolean paramBoolean) {
-        if (cNum == 0) {
-            progressDialog.setMessage("连接中...");
-        } else {
-            progressDialog.setMessage(MessageFormat.format("第{0}次自动连接中...", cNum));
-        }
-        progressDialog.show();
+//        if (cNum == 0) {
+//            progressDialog.setMessage("连接中...");
+//        } else {
+//            progressDialog.setMessage(MessageFormat.format("第{0}次自动连接中...", cNum));
+//        }
+//        progressDialog.show();
         String str = paramIntent.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
         macStr = str;
         BluetoothDevice localBluetoothDevice = this.mBluetoothAdapter.getRemoteDevice(str);
@@ -191,7 +191,7 @@ public class DeviceManageActivity extends Activity {
                 progressDialog.dismiss();
                 return;
             case 3:
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
                 if ("".equals(macStr)) {
                     if (cNum != 0) {
                         tryCon();
@@ -208,6 +208,7 @@ public class DeviceManageActivity extends Activity {
                 findViewById(R.id.ll_main2).setVisibility(View.VISIBLE);
                 Log.e("cyf123", "222222222   ");
                 saveMacStr(macStr);
+                progressDialog.dismiss();
                 return;
             case 2:
                 String str2 = getResources().getString(R.string.title_connecting);
@@ -243,6 +244,12 @@ public class DeviceManageActivity extends Activity {
         switch (paramInt1) {
             case REQUEST_CONNECT_DEVICE_SECURE:
                 if (paramInt2 == -1) {
+                    //        if (cNum == 0) {
+                    progressDialog.setMessage("连接中...");
+//        } else {
+//            progressDialog.setMessage(MessageFormat.format("第{0}次自动连接中...", cNum));
+//        }
+                    progressDialog.show();
                     cNum = 0;
                     connectDevice(paramIntent, true);
                 } else {
@@ -413,19 +420,20 @@ public class DeviceManageActivity extends Activity {
                             DeviceManageActivity.this.mConversationArrayAdapter.add(str1 + str6);
                             break;
                         case 3:
-                            progressDialog.dismiss();
+
                             String str5 = DeviceManageActivity.this.getResources().getString(R.string.title_connected_to);
                             DeviceManageActivity.this.mConversationArrayAdapter.add(str1 + str5 + DeviceManageActivity.this.mConnectedDeviceName);
                             Message localMessage = DeviceManageActivity.this.mHandler.obtainMessage(MESSAGE_GET_DEVICE_SN);
                             DeviceManageActivity.this.mHandler.sendMessageDelayed(localMessage, 1000L);
                             Toast.makeText(DeviceManageActivity.this, str5 + DeviceManageActivity.this.mConnectedDeviceName, Toast.LENGTH_SHORT).show();
-
                             ((TextView) findViewById(R.id.tv_name)).setText(DeviceManageActivity.this.mConnectedDeviceName);
                             findViewById(R.id.ll_main2).setVisibility(View.VISIBLE);
                             Log.e("cyf123", "1111111111   ");
                             saveMacStr(macStr);
+                            progressDialog.dismiss();
                             break;
                         default:
+                            Log.e("zj","1111111");
                             if (cNum != 0) {
                                 tryCon();
                             }
@@ -474,7 +482,7 @@ public class DeviceManageActivity extends Activity {
             @Override
             public void run() {
                 cNum++;
-                if (cNum == 4) {
+                if (cNum == 2) {
                     cNum = 0;
                     return;
                 }
